@@ -10,5 +10,8 @@ namespace GivingJobs.Services.Interfaces
     {
         List<Job> GetAll();
         Task<Job> Create(Job job);
+        Task<Job> Get(int id);
+        Task<Job> Edit(Job job);
+        Task<Job> Delete(Job job);
     }
 }
