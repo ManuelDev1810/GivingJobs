@@ -13,6 +13,8 @@ using Microsoft.Extensions;
 using Microsoft.Extensions.Configuration;
 using GivingJobs.Services.Repositories;
 using GivingJobs.Services.Interfaces;
+using GivingJobs.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace GivingJobs
 {
@@ -28,7 +30,7 @@ namespace GivingJobs
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            //Cors
+            /*************Cors**************/
             services.AddCors(options => {
                 options.AddPolicy("AllowAllOrigin", builder =>
                 builder.AllowAnyOrigin()
@@ -38,15 +40,28 @@ namespace GivingJobs
                 );
             });
 
-            //DbContext
+            /*************Identity**************/
+            
+            services.AddDbContext<AppIdentityDbContext>(options => {
+                options.UseSqlServer(Configuration["Data:ConnectionStrings:AppIdentityConnectionString"]);
+            });
+
+            services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
+
+            /*************ApplicationDbContext**************/
+
+            //ApplicationDbContext
             services.AddDbContext<ApplicationDbContext>(options => {
                 options.UseSqlServer(Configuration["Data:ConnectionStrings:GivingJobsConnectionString"]);
             });
 
-            //Dependey Injection
+
+            /*************Dependecy Injections**************/
             services.AddTransient<IJobRepository, JobRepository>();
 
-            //Mvc
+            /*************MVC**************/
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
