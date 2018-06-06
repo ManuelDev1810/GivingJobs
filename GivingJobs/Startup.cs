@@ -38,11 +38,15 @@ namespace GivingJobs
                 );
             });
 
+            //DbContext
             services.AddDbContext<ApplicationDbContext>(options => {
                 options.UseSqlServer(Configuration["Data:ConnectionStrings:GivingJobsConnectionString"]);
             });
 
+            //Dependey Injection
             services.AddTransient<IJobRepository, JobRepository>();
+
+            //Mvc
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
