@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
-import {Route, Link } from 'react-router-dom'
+import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 
-
-class CreateJob extends Component {
+class Register extends Component {
 
     constructor(){
-      super();
-      this.submitData = this.submitData.bind(this)
+        super();
+        this.register = this.register.bind(this);
     }
 
-    submitData(){
+    register(){
         let nameInput = this.name.value
-        let descriptionInput = this.email.value
-        let emailInput = this.description.value
+        let passwordInput = this.password.value
+        let emailInput = this.email.value
         
         let post = {
             method: "POST",
@@ -20,13 +19,13 @@ class CreateJob extends Component {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-            body: JSON.stringify({name: nameInput, description: descriptionInput, email: emailInput})
+            body: JSON.stringify({name: nameInput, password: passwordInput, email: emailInput})
         }
 
-        fetch('https://localhost:44365//api/home', post)
+        fetch('https://localhost:44365/api/account', post)
             .then(response => response.json())
             .then(response => console.log(response))
-            .then(this.props.history.push('/'))
+            .then(this.props.history.push('/Login'))
     }
 
     render(){
@@ -34,7 +33,7 @@ class CreateJob extends Component {
             <div>
                 <a className="w-25"><Link to="/">Home</Link></a>
                 <hr />
-                <h2>Create a Job</h2>
+                <h2>Register</h2>
                 <form className="">
                     <div className="form-group">
                         <label for="name">Name</label>
@@ -47,15 +46,15 @@ class CreateJob extends Component {
                     </div>
 
                     <div className="form-group">
-                        <label for="description">Description</label>
-                        <input className="form-control" type="text" id="description" ref={(description) => this.description = description} />
+                        <label for="password">Password</label>
+                        <input className="form-control" type="text" id="password" ref={(password) => this.password = password} />
                     </div>
 
-                    <input onClick={this.submitData} className="btn btn-primary" value="Submit" />
+                    <input onClick={this.register} className="btn btn-primary" value="Submit" />
                 </form>
             </div>
         )
     }
 }
 
-export default CreateJob;
+export default Register

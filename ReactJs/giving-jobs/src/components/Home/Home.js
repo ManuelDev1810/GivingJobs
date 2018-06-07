@@ -20,12 +20,21 @@ class Home extends Component {
             loading: false
           });
         });
+
+        
+          
+        
+        //   fetch('https://localhost:44365/api/account/IsIn')
+        //  .then(response => response.json())
+        //  .then(response => console.log(response)) 
       }
+
+
 
       static renderJobsTable(jobs){
         return(
             <div>
-              <Link to='/CreateJob'>Create Job</Link>
+              <h2>Jobs</h2>
               
               <table className="table">
     

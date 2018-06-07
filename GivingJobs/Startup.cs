@@ -77,6 +77,7 @@ namespace GivingJobs
             app.UseStatusCodePages();
             app.UseHttpsRedirection();
             app.UseCors("AllowAllOrigin");
+            app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
         }
     }
