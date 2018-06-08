@@ -29,7 +29,6 @@ namespace GivingJobs.Controllers
                 AppUser user = await userManager.FindByEmailAsync(model.Email);
                 if(user != null)
                 {
-                    isIn = false;
                     Microsoft.AspNetCore.Identity.SignInResult result = 
                         await signInManager.PasswordSignInAsync(user,model.Password,false,false);
 
@@ -70,13 +69,6 @@ namespace GivingJobs.Controllers
                     AddErrosFromResult(result);
             }
             return BadRequest();
-        }
-
-        [Route("IsIn")]
-        [HttpGet]
-        public bool IsIn()
-        {
-            return User.Identity.IsAuthenticated;
         }
 
         void AddErrosFromResult(IdentityResult result)

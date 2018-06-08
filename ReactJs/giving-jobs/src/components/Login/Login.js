@@ -2,9 +2,14 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 
 class Login extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.login = this.login.bind(this);
+        this.onHandleUser = this.onHandleUser.bind(this);
+    }
+
+    componentWillMount(){
+        console.log(this.props.user)
     }
 
     login(){
@@ -22,8 +27,12 @@ class Login extends Component{
 
         fetch('https://localhost:44365/api/account/login', post)
             .then(response => response.json())
-            .then(response => console.log(response))
+            .then(response => this.onHandleUser(response))
             .then(this.props.history.push('/'))
+    }
+
+    onHandleUser(user){
+        this.props.logIn(user)
     }
 
     render(){

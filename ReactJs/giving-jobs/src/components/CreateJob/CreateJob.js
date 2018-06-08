@@ -37,17 +37,17 @@ class CreateJob extends Component {
                 <h2>Create a Job</h2>
                 <form className="">
                     <div className="form-group">
-                        <label for="name">Name</label>
+                        <label htmlFor="name">Name</label>
                         <input className="form-control" type="text" id="name" ref={(name) => this.name = name}/>
                     </div>
 
                     <div className="form-group">
-                        <label for="email">Email</label>
+                        <label htmlFor="email">Email</label>
                         <input className="form-control" type="text" id="email" ref={(email) => this.email = email} />
                     </div>
 
                     <div className="form-group">
-                        <label for="description">Description</label>
+                        <label htmlFor="description">Description</label>
                         <input className="form-control" type="text" id="description" ref={(description) => this.description = description} />
                     </div>
 

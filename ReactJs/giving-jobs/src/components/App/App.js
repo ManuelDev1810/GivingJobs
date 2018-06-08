@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Home from '../Home/Home'
 import Login from '../Login/Login'
 import Register from '../Register/Register'
+import HeaderBar from '../HeaderBar/HeaderBar'
 import CreateJob from '../CreateJob/CreateJob'
 import {Route, Link, BrowserRouter as Router } from 'react-router-dom'
 
@@ -9,21 +10,26 @@ class App extends Component {
 
   constructor(){
     super();
+    this.state = {
+      user: null
+    }
+
+    this.logIn = this.logIn.bind(this);
+  }
+
+  logIn(user){
+    this.setState({user})
+    console.log(user)
   }
 
   render(){
     return(
       <Router>
         <div className="container">
-            <div className="row justify-content-between mt-3">
-              <h1>Giving Jobs</h1>    
-              <Link to="/Login">Log In</Link>
-              <Link to='/CreateJob'>Create Job</Link>
-            </div>
-            <hr />
+            <HeaderBar user={this.state.user} />
             <Route exact path="/" component={Home} />
             <Route path="/CreateJob" render={props => <CreateJob {... props} />} />
-            <Route path="/Login" render={props => <Login {...props} />} />
+            <Route path="/Login" render={props => <Login {...props} user={this.state.user} logIn={this.logIn} />} />
             <Route path="/Register" render={props => <Register {...props} />}/>
         </div>
       </Router>
