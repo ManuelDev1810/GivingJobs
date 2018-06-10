@@ -1,13 +1,37 @@
 import React, {Component} from 'react'
+import Job from '../Job/Job'
 
 class Jobs extends Component{
 
     constructor(props){
         super(props);
+        this.state = {
+          jobs: [],
+          loading: true
+        }
     }
 
-    static renderJobsTable(jobs){
+    componentWillMount(){
+      fetch('https://localhost:44365/api/home')
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          jobs: data,
+          loading: false
+        });
+      })
+    }
+
+     static jobComponent(id, props){
+      props.history.push({
+        pathname: '/Job',
+        state: {id : id}
+      })
+    }
+
+     static renderJobsTable(jobs, props){
         return(
+
             <div>
               <h2>Jobs</h2>
               
@@ -21,7 +45,7 @@ class Jobs extends Component{
 
                   <tbody>
                     {jobs.map(job => 
-                          <tr key={job.id}>
+                          <tr onClick={() => {this.jobComponent(job.id, props)}} key={job.id}>
                             <th scope="row">{job.id}</th><td>{job.name}</td><td>{job.email}</td><td>{job.description}</td>
                           </tr>
                     )}
@@ -31,19 +55,21 @@ class Jobs extends Component{
           </div>
         );
       }
-    
+      
       render() {
-    
-        let content = this.props.loading
+        
+        let content = this.state.loading
         ? <p><em>Loading...</em></p>
-        : Jobs.renderJobsTable(this.props.jobs);
+        : Jobs.renderJobsTable(this.state.jobs, this.props);
+
+
         
         return(
           <div>
             {content}
           </div>
         )
+      }
     }
-}
 
 export default Jobs

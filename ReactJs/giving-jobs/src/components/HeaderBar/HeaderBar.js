@@ -11,7 +11,7 @@ class HeaderBar extends Component{
         if(this.props.user){
             return (
                 <div className="justify-content-end col-2">
-                    <p>Holla {this.props.user.userName}</p>
+                    <p>Hola {this.props.user.userName}</p>
                     <Link to='/CreateJob'>Create Job</Link>
                 </div>
             )

@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import Home from '../Home/Home'
+import React, { Component } from 'react'
 import Login from '../Login/Login'
 import Register from '../Register/Register'
 import HeaderBar from '../HeaderBar/HeaderBar'
 import CreateJob from '../CreateJob/CreateJob'
+import Job from '../Job/Job'
+import Jobs from '../Jobs/Jobs'
 import {Route, Link, BrowserRouter as Router } from 'react-router-dom'
 
 class App extends Component {
@@ -11,7 +12,7 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      user: null
+       user: null
     }
 
     this.logIn = this.logIn.bind(this);
@@ -27,10 +28,11 @@ class App extends Component {
       <Router>
         <div className="container">
             <HeaderBar user={this.state.user} />
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" render={props => <Jobs {...props} />} />
             <Route path="/CreateJob" render={props => <CreateJob {... props} />} />
             <Route path="/Login" render={props => <Login {...props} user={this.state.user} logIn={this.logIn} />} />
             <Route path="/Register" render={props => <Register {...props} />}/>
+            <Route path="/Job" render={props => <Job {...props} />} />
         </div>
       </Router>
     )
