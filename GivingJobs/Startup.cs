@@ -79,6 +79,7 @@ namespace GivingJobs
             app.UseCors("AllowAllOrigin");
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
+            SeedData.SeedAdminUser(app).Wait();
         }
     }
 }

@@ -13,15 +13,22 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-       user: null
+       user: sessionStorage.getItem('user') || null
     }
 
     this.logIn = this.logIn.bind(this);
   }
 
   logIn(user){
-    this.setState({user})
-    console.log(user)
+    if(sessionStorage.getItem('user') == null){
+        sessionStorage.setItem('user', JSON.stringify(user))
+        let data = JSON.parse(sessionStorage.getItem('user'))
+        this.setState({user: data})
+    } else {
+      sessionStorage.clear()
+      this.setState({user: null})
+    }
+    
   }
 
   render(){

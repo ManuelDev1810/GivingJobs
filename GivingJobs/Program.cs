@@ -19,6 +19,7 @@ namespace GivingJobs
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .UseDefaultServiceProvider(opts => opts.ValidateScopes = false);
     }
 }

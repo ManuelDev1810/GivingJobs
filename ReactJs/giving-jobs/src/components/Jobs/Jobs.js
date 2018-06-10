@@ -22,6 +22,12 @@ class Jobs extends Component{
       })
     }
 
+    letmesee(){
+      fetch('https://localhost:44365/api/account/isAnAdmin')
+      .then(response => response.json())
+      .then(response => console.log(response))
+    }
+
      static jobComponent(id, props){
       props.history.push({
         pathname: '/Job',
@@ -67,6 +73,7 @@ class Jobs extends Component{
         return(
           <div>
             {content}
+            {this.letmesee()}
           </div>
         )
       }
