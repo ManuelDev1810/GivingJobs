@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom';
 import Login from '../Login/Login'
 import Register from '../Register/Register'
 import HeaderBar from '../HeaderBar/HeaderBar'
@@ -27,7 +28,7 @@ class App extends Component {
     return(
       <Router>
         <div className="container">
-            <HeaderBar user={this.state.user} />
+            <HeaderBar user={this.state.user} logout={this.logIn} />
             <Route exact path="/" render={props => <Jobs {...props} />} />
             <Route path="/CreateJob" render={props => <CreateJob {... props} />} />
             <Route path="/Login" render={props => <Login {...props} user={this.state.user} logIn={this.logIn} />} />

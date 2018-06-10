@@ -50,6 +50,13 @@ namespace GivingJobs.Controllers
             }
         }
 
+        [Route("logout")]
+        [HttpGet]
+        public async Task Logout()
+        {
+            await signInManager.SignOutAsync();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Register(CreateUser model)
         {

@@ -7,11 +7,16 @@ class HeaderBar extends Component{
         this.authenticated = this.authenticated.bind(this);
     }
 
+    logout(){
+        fetch('https://localhost:44365/api/account/logout')
+        .then(() => this.props.logout())
+    }
+
     authenticated(){
         if(this.props.user){
             return (
                 <div className="justify-content-end col-2">
-                    <p>Hola {this.props.user.userName}</p>
+                    <p>Hellow {this.props.user.userName}  <a href="#" onClick={() => this.logout()}>Logout</a></p>
                     <Link to='/CreateJob'>Create Job</Link>
                 </div>
             )
