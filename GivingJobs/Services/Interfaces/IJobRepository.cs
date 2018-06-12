@@ -8,7 +8,7 @@ namespace GivingJobs.Services.Interfaces
 {
     public interface IJobRepository
     {
-        List<Job> GetAll();
+        Task<IEnumerable<Job>> Jobs();
         Task<Job> Create(Job job);
         Task<Job> Get(int id);
         Task<Job> Edit(Job job);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GivingJobs.Models
 {
@@ -17,6 +18,8 @@ namespace GivingJobs.Models
         [Required]
         public string Email { get; set; }
         [Required]
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public Category Category { get; set; }
     }
 }

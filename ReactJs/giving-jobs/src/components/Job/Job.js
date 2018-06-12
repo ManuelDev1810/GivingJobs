@@ -29,6 +29,7 @@ class Job extends Component {
             <p>{state.job.date}</p>
             <p>{state.job.description}</p>
             <p>{state.job.email}</p>
+            <p>{state.job.category.name}</p>
         </div>
         )
     }
@@ -46,7 +47,7 @@ class Job extends Component {
     render(){
 
         let content = this.state.job ? Job.renderJob(this.state) : Job.renderNotFound()
-
+        console.log(this.state.job)
         return(
             <div>
                 {content}

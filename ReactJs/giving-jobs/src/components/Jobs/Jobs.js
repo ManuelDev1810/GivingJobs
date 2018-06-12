@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 import Job from '../Job/Job'
 
 class Jobs extends Component{
@@ -7,6 +8,7 @@ class Jobs extends Component{
         super(props);
         this.state = {
           jobs: [],
+          categories: [],
           loading: true
         }
     }
@@ -19,7 +21,15 @@ class Jobs extends Component{
           jobs: data,
           loading: false
         });
-      }).then(data => console.log(this.state.jobs))
+      })
+
+      fetch('https://localhost:44365/api/category')
+      .then(resposne => resposne.json())
+      .then(data => {
+        this.setState({
+          categories: data
+        })
+      })
     }
 
     isAnAdmin(){
@@ -35,22 +45,22 @@ class Jobs extends Component{
       })
     }
 
-    static hola(date){
+    static date(date){
       var dateCreated = new Date(date);
       return(dateCreated.toDateString())
     }
 
-     static renderJobsTable(jobs, props){
+     static renderJobsTable(jobs, categories, props){
         return(
 
-            <div>
-              <h2>Jobs</h2>
+            <div className="row justify-content-between">
+              <h2 className="col-12">Jobs</h2>
               
-              <table className="table">
+              <table className="table col-8">
     
                   <thead className="thead-dark">
                     <tr>
-                      <th scope="col">Id</th><th scope="col">Name</th>
+                      <th scope="col">Name</th>
                       <th scope="col">Date</th>
                       <th scope="col">Category</th>
                     </tr>
@@ -59,12 +69,21 @@ class Jobs extends Component{
                   <tbody>
                     {jobs.map(job => 
                           <tr onClick={() => this.jobComponent(job.id, props)} key={job.id}>
-                            <th scope="row">{job.id}</th><td>{job.name}</td><td>{Jobs.hola(job.date)}</td><td>{job.category}</td>
+                            <td>{job.name}</td><td>{Jobs.date(job.date)}</td><td>{job.category.name}</td>
                           </tr>
                     )}
                   </tbody>
                   
               </table>
+
+                  <div className="card col-3">
+                    <div className="card-body d-flex flex-column">
+                        <h3 className="card-title">Categories</h3>
+                        {categories.map(category => 
+                          <Link key={category.id} to="#">{category.name}</Link>
+                        )}
+                    </div>
+                </div> 
           </div>
         );
       }
@@ -73,7 +92,7 @@ class Jobs extends Component{
         
         let content = this.state.loading
         ? <p><em>Loading...</em></p>
-        : Jobs.renderJobsTable(this.state.jobs, this.props);
+        : Jobs.renderJobsTable(this.state.jobs, this.state.categories, this.props);
 
 
         

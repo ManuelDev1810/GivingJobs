@@ -60,6 +60,7 @@ namespace GivingJobs
 
             /*************Dependecy Injections**************/
             services.AddTransient<IJobRepository, JobRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
 
             /*************MVC**************/
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -80,6 +81,7 @@ namespace GivingJobs
             app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
             SeedData.SeedAdminUser(app).Wait();
+            SeedData.SeedCategories(app);
         }
     }
 }

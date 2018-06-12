@@ -13,14 +13,22 @@ namespace GivingJobs.Controllers
     public class HomeController : ControllerBase
     {
         IJobRepository jobRepository;
-        public HomeController(IJobRepository repository) => jobRepository = repository;
+        ICategoryRepository categoryRepository;
+        public HomeController(IJobRepository repository, ICategoryRepository category)
+        {
+            jobRepository = repository;
+            categoryRepository = category;
+        }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            List<Job> jobs = jobRepository.GetAll();
-            jobs.Reverse();
-            return Ok(jobs);
+            IEnumerable<Job> Jobs = await jobRepository.Jobs();
+            foreach(var job in Jobs)
+            {
+                job.Category = await categoryRepository.GetById(job.CategoryId);
+            }
+            return Ok(Jobs);
         }
 
         [HttpGet]
@@ -28,6 +36,7 @@ namespace GivingJobs.Controllers
         public async Task<IActionResult> Get(int id)
         {
             Job job = await jobRepository.Get(id);
+            job.Category = await categoryRepository.GetById(job.CategoryId);
             if (job != null)
                 return Ok(job);
             else

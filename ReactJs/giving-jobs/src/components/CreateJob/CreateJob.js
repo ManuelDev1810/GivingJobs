@@ -6,7 +6,18 @@ class CreateJob extends Component {
 
     constructor(){
       super();
+      this.state = {categories: []}
       this.submitData = this.submitData.bind(this)
+    }
+    
+    componentWillMount(){
+        fetch('https://localhost:44365/api/category')
+        .then(resposne => resposne.json())
+        .then(data => {
+          this.setState({
+            categories: data
+          })
+        })
     }
 
     submitData(){
@@ -21,7 +32,7 @@ class CreateJob extends Component {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-            body: JSON.stringify({name: nameInput, description: descriptionInput, email: emailInput, category: categoryInput})
+            body: JSON.stringify({name: nameInput, description: descriptionInput, email: emailInput, categoryId: categoryInput})
         }
 
         fetch('https://localhost:44365//api/home', post)
@@ -50,15 +61,15 @@ class CreateJob extends Component {
                     <div className="form-group">
                         <label htmlFor="categories">Category</label>
                         <select id="categories" className="form-control" ref={category => this.category = category}>
-                            <option>Programming</option>
-                                    <option>Design</option>
-                            <option>Databases</option>
+                           {this.state.categories.map(category =>
+                                <option key={category.id} name="categoryId" value={category.id}>{category.name}</option>
+                            )}
                         </select>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="description">Description</label>
-                        <input className="form-control" type="text" id="description" ref={(description) => this.description = description} />
+                        <textarea className="form-control" id="description" ref={(description) => this.description = description}></textarea>
                     </div>
 
                     <input onClick={this.submitData} className="btn btn-primary" value="Submit" />

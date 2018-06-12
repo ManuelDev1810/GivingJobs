@@ -18,7 +18,7 @@ namespace GivingJobs.Services.Repositories
             dbContext = applicationDb;
         }
 
-        public List<Job> GetAll() => dbContext.Jobs.ToList();
+        public async Task<IEnumerable<Job>> Jobs() => await dbContext.Jobs.ToListAsync();
 
         public async Task<Job> Get(int id)
         {
@@ -27,9 +27,15 @@ namespace GivingJobs.Services.Repositories
 
         public async Task<Job> Create(Job job)
         {
-            dbContext.Jobs.Add(job);
-            await dbContext.SaveChangesAsync();
-            return job;
+            try
+            {
+                dbContext.Jobs.Add(job);
+                await dbContext.SaveChangesAsync();
+                return job;
+            }catch(Exception e)
+            {
+                throw e;
+            }
         }
         
         
