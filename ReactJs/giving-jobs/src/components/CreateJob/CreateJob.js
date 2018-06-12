@@ -13,6 +13,7 @@ class CreateJob extends Component {
         let nameInput = this.name.value
         let descriptionInput = this.email.value
         let emailInput = this.description.value
+        let categoryInput = this.category.value
         
         let post = {
             method: "POST",
@@ -20,7 +21,7 @@ class CreateJob extends Component {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-            body: JSON.stringify({name: nameInput, description: descriptionInput, email: emailInput})
+            body: JSON.stringify({name: nameInput, description: descriptionInput, email: emailInput, category: categoryInput})
         }
 
         fetch('https://localhost:44365//api/home', post)
@@ -44,6 +45,15 @@ class CreateJob extends Component {
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
                         <input className="form-control" type="text" id="email" ref={(email) => this.email = email} />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="categories">Category</label>
+                        <select id="categories" className="form-control" ref={category => this.category = category}>
+                            <option>Programming</option>
+                                    <option>Design</option>
+                            <option>Databases</option>
+                        </select>
                     </div>
 
                     <div className="form-group">

@@ -82,6 +82,7 @@ namespace GivingJobs.Controllers
         [HttpGet]
         public async Task<IActionResult> IsAnAdmin()
         {
+            //User.is
             AppUser user = await userManager.FindByNameAsync("Manuel");
             bool yesOrNot = await userManager.IsInRoleAsync(user, "Admin");
             if (yesOrNot)

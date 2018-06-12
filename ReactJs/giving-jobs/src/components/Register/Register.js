@@ -47,7 +47,7 @@ class Register extends Component {
 
                     <div className="form-group">
                         <label for="password">Password</label>
-                        <input className="form-control" type="text" id="password" ref={(password) => this.password = password} />
+                        <input className="form-control" type="password" id="password" ref={(password) => this.password = password} />
                     </div>
 
                     <input onClick={this.register} className="btn btn-primary" value="Submit" />

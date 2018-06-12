@@ -24,6 +24,7 @@ class App extends Component {
         sessionStorage.setItem('user', JSON.stringify(user))
         let data = JSON.parse(sessionStorage.getItem('user'))
         this.setState({user: data})
+        console.log(data)
     } else {
       sessionStorage.clear()
       this.setState({user: null})

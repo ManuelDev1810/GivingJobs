@@ -16,5 +16,7 @@ namespace GivingJobs.Models
         public string Description { get; set; }
         [Required]
         public string Email { get; set; }
+        [Required]
+        public string Category { get; set; }
     }
 }

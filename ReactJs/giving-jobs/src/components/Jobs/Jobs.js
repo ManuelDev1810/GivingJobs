@@ -19,10 +19,10 @@ class Jobs extends Component{
           jobs: data,
           loading: false
         });
-      })
+      }).then(data => console.log(this.state.jobs))
     }
 
-    letmesee(){
+    isAnAdmin(){
       fetch('https://localhost:44365/api/account/isAnAdmin')
       .then(response => response.json())
       .then(response => console.log(response))
@@ -35,6 +35,11 @@ class Jobs extends Component{
       })
     }
 
+    static hola(date){
+      var dateCreated = new Date(date);
+      return(dateCreated.toDateString())
+    }
+
      static renderJobsTable(jobs, props){
         return(
 
@@ -45,14 +50,16 @@ class Jobs extends Component{
     
                   <thead className="thead-dark">
                     <tr>
-                      <th scope="col">Id</th><th scope="col">Name</th><th scope="col">Email</th><th scope="col">Description</th>
+                      <th scope="col">Id</th><th scope="col">Name</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Category</th>
                     </tr>
                   </thead>
 
                   <tbody>
                     {jobs.map(job => 
-                          <tr onClick={() => {this.jobComponent(job.id, props)}} key={job.id}>
-                            <th scope="row">{job.id}</th><td>{job.name}</td><td>{job.email}</td><td>{job.description}</td>
+                          <tr onClick={() => this.jobComponent(job.id, props)} key={job.id}>
+                            <th scope="row">{job.id}</th><td>{job.name}</td><td>{Jobs.hola(job.date)}</td><td>{job.category}</td>
                           </tr>
                     )}
                   </tbody>
@@ -73,7 +80,7 @@ class Jobs extends Component{
         return(
           <div>
             {content}
-            {this.letmesee()}
+            {this.isAnAdmin()}
           </div>
         )
       }

@@ -37,6 +37,7 @@ namespace GivingJobs.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Job model)
         {
+            model.Date = DateTime.Now;
             Job job = await jobRepository.Create(model);
             if (job != null)
                 return Ok(job);
