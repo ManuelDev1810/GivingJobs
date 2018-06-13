@@ -13,9 +13,11 @@ namespace GivingJobs.Controllers
     public class CategoryController : Controller
     {
         ICategoryRepository repository;
-        public CategoryController(ICategoryRepository categoryRepository)
+        IJobRepository jobRepository;
+        public CategoryController(ICategoryRepository categoryRepository, IJobRepository jobRepo)
         {
             repository = categoryRepository;
+            jobRepository = jobRepo;
         }
 
         [HttpGet]
@@ -29,8 +31,17 @@ namespace GivingJobs.Controllers
         [HttpGet]
         public async Task<IActionResult> GetById(int id)
         {
-            Category category = await repository.GetById(id);
-            return Ok(category);
+            try
+            {
+                IEnumerable<Job> jobs = await jobRepository.GetByCategory(id);
+                Category category  = await repository.GetById(id);
+                var categoriesOfJob = new { Jobs = jobs, Categori = category };
+                return Ok(categoriesOfJob);
+
+            }catch(Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

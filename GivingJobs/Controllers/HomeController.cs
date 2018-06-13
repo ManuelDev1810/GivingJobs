@@ -24,7 +24,7 @@ namespace GivingJobs.Controllers
         public async Task<IActionResult> Get()
         {
             IEnumerable<Job> Jobs = await jobRepository.Jobs();
-            foreach(var job in Jobs)
+            foreach (var job in Jobs)
             {
                 job.Category = await categoryRepository.GetById(job.CategoryId);
             }

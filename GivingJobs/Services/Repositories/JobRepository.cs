@@ -25,6 +25,12 @@ namespace GivingJobs.Services.Repositories
             return await dbContext.Jobs.FindAsync(id);
         }
 
+        public async Task<IEnumerable<Job>> GetByCategory(int id)
+        {
+            List<Job> jobs = await dbContext.Jobs.Where(m => m.CategoryId == id).ToListAsync();
+            return jobs;
+        }
+
         public async Task<Job> Create(Job job)
         {
             try

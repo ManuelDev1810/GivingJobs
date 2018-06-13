@@ -11,6 +11,7 @@ namespace GivingJobs.Services.Interfaces
         Task<IEnumerable<Job>> Jobs();
         Task<Job> Create(Job job);
         Task<Job> Get(int id);
+        Task<IEnumerable<Job>> GetByCategory(int id);
         Task<Job> Edit(Job job);
         Task<Job> Delete(Job job);
     }

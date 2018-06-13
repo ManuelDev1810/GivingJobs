@@ -47,7 +47,6 @@ class Job extends Component {
     render(){
 
         let content = this.state.job ? Job.renderJob(this.state) : Job.renderNotFound()
-        console.log(this.state.job)
         return(
             <div>
                 {content}

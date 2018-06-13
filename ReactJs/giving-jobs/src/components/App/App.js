@@ -4,6 +4,7 @@ import Login from '../Login/Login'
 import Register from '../Register/Register'
 import HeaderBar from '../HeaderBar/HeaderBar'
 import CreateJob from '../CreateJob/CreateJob'
+import Category from '../Category/Category'
 import Job from '../Job/Job'
 import Jobs from '../Jobs/Jobs'
 import {Route, Link, BrowserRouter as Router } from 'react-router-dom'
@@ -42,6 +43,7 @@ class App extends Component {
             <Route path="/Login" render={props => <Login {...props} user={this.state.user} logIn={this.logIn} />} />
             <Route path="/Register" render={props => <Register {...props} />}/>
             <Route path="/Job" render={props => <Job {...props} />} />
+            <Route path="/Category" render={props => <Category {...props} />} />
         </div>
       </Router>
     )

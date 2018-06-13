@@ -44,7 +44,7 @@ class Jobs extends Component{
         state: {id : id}
       })
     }
-
+    
     static date(date){
       var dateCreated = new Date(date);
       return(dateCreated.toDateString())
@@ -69,7 +69,8 @@ class Jobs extends Component{
                   <tbody>
                     {jobs.map(job => 
                           <tr onClick={() => this.jobComponent(job.id, props)} key={job.id}>
-                            <td>{job.name}</td><td>{Jobs.date(job.date)}</td><td>{job.category.name}</td>
+                            <td>{job.name}</td><td>{Jobs.date(job.date)}</td>
+                            <td>{job.category.name}</td>
                           </tr>
                     )}
                   </tbody>
@@ -80,7 +81,7 @@ class Jobs extends Component{
                     <div className="card-body d-flex flex-column">
                         <h3 className="card-title">Categories</h3>
                         {categories.map(category => 
-                          <Link key={category.id} to="#">{category.name}</Link>
+                          <Link to={{pathname: '/Category', state:{id: category.id}}}>{category.name}</Link>
                         )}
                     </div>
                 </div> 
@@ -93,9 +94,6 @@ class Jobs extends Component{
         let content = this.state.loading
         ? <p><em>Loading...</em></p>
         : Jobs.renderJobsTable(this.state.jobs, this.state.categories, this.props);
-
-
-        
         return(
           <div>
             {content}

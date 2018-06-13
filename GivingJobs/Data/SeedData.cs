@@ -42,7 +42,7 @@ namespace GivingJobs.Data
         {
             ApplicationDbContext context = builder.ApplicationServices.GetRequiredService<ApplicationDbContext>();
             context.Database.Migrate();
-            if (context.Categories.Any())
+            if (!context.Categories.Any())
             {
                 context.Categories.AddRange(
                      new Category

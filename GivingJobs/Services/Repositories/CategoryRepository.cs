@@ -22,6 +22,6 @@ namespace GivingJobs.Services.Repositories
             return context.Categories.ToList();
         }
 
-        public Task<Category> GetById(int id) => context.Categories.SingleOrDefaultAsync(m => m.Id == id);
+        public async Task<Category> GetById(int id) => await context.Categories.SingleOrDefaultAsync(m => m.Id == id);
     }
 }
