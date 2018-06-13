@@ -28,6 +28,7 @@ namespace GivingJobs.Controllers
             {
                 job.Category = await categoryRepository.GetById(job.CategoryId);
             }
+            Jobs.Reverse();
             return Ok(Jobs);
         }
 

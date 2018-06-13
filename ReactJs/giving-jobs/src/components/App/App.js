@@ -7,7 +7,7 @@ import CreateJob from '../CreateJob/CreateJob'
 import Category from '../Category/Category'
 import Job from '../Job/Job'
 import Jobs from '../Jobs/Jobs'
-import {Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import {Route, BrowserRouter as Router } from 'react-router-dom'
 
 class App extends Component {
 
@@ -19,6 +19,7 @@ class App extends Component {
        loading: true
     }
     this.logIn = this.logIn.bind(this);
+    this.addNewJob = this.addNewJob.bind(this);
   }
 
   componentWillMount(){
@@ -37,7 +38,11 @@ class App extends Component {
       sessionStorage.clear()
       this.setState({user: null})
     }
-    
+  }
+
+  addNewJob(job){
+    console.log(job)
+    // this.setState({jobs: this.state.jobs.concat(job)})
   }
 
   render(){
@@ -46,7 +51,7 @@ class App extends Component {
         <div className="container">
             <HeaderBar user={this.state.user} logout={this.logIn} />
             <Route exact path="/" render={props => <Jobs {...props} jobs={this.state.jobs} loading={this.state.loading} />} />
-            <Route path="/CreateJob" render={props => <CreateJob {... props} />} />
+            <Route path="/CreateJob" render={props => <CreateJob {... props} addNewJob={this.addNewJob}  />} />
             <Route path="/Login" render={props => <Login {...props} user={this.state.user} logIn={this.logIn} />} />
             <Route path="/Register" render={props => <Register {...props} />}/>
             <Route path="/Job" render={props => <Job {...props} />} />

@@ -7,8 +7,10 @@ class Jobs extends Component{
     constructor(props){
         super(props);
         this.state = {
-          categories: []
+          categories: [],
+          search: ''
         }
+        this.updateSearch = this.updateSearch.bind(this)
     }
 
     componentWillMount(){
@@ -27,6 +29,10 @@ class Jobs extends Component{
       .then(response => console.log(response))
     }
 
+    updateSearch(event){
+        this.setState({search: event.target.value.substr(0,20)})
+    }
+
      static jobComponent(id, props){
       props.history.push({
         pathname: '/Job',
@@ -39,12 +45,17 @@ class Jobs extends Component{
       return(dateCreated.toDateString())
     }
 
-     static renderJobsTable(jobs, categories, props){
+     static renderJobsTable(jobs, state, props){
+       let  filteredJobs = jobs.filter(
+            (job) => {
+              //Return whatever that is not -1, indexof returns -1 if not find anything.. 
+              //So if you cannot get this particular name of the job DONT RETURN ANYTHING
+              return job.name.toLowerCase().indexOf(state.search.toLowerCase()) !== -1;
+            }
+       ).reverse();
         return(
-
-            <div className="row justify-content-between">
-              <h2 className="col-12">Jobs</h2>
-              
+          <div className="row justify-content-between">
+              <h2 className="col-12 mito">Jobs</h2>
               <table className="table col-8">
     
                   <thead className="thead-dark">
@@ -56,7 +67,7 @@ class Jobs extends Component{
                   </thead>
 
                   <tbody>
-                    {jobs.map(job => 
+                    {filteredJobs.map(job => 
                           <tr onClick={() => this.jobComponent(job.id, props)} key={job.id}>
                             <td>{job.name}</td><td>{Jobs.date(job.date)}</td>
                             <td>{job.category.name}</td>
@@ -65,12 +76,11 @@ class Jobs extends Component{
                   </tbody>
                   
               </table>
-
                   <div className="card col-3">
                     <div className="card-body d-flex flex-column">
                         <h3 className="card-title">Categories</h3>
-                        {categories.map(category => 
-                          <Link to={{pathname: '/Category', state:{id: category.id}}}>{category.name}</Link>
+                        {state.categories.map(category => 
+                          <Link className="btn btn-success mb-3" to={{pathname: '/Category', state:{id: category.id}}}>{category.name}</Link>
                         )}
                     </div>
                 </div> 
@@ -82,11 +92,12 @@ class Jobs extends Component{
         
         let content = this.props.loading
         ? <p><em>Loading...</em></p>
-        : Jobs.renderJobsTable(this.props.jobs, this.state.categories, this.props);
+        : Jobs.renderJobsTable(this.props.jobs, this.state, this.props);
         return(
           <div>
+            <input className="mb-2 form-control" type="text" name="nombre" placeholder="Search By Name"  onChange={this.updateSearch} />
             {content}
-            {this.isAnAdmin()}
+            {/* {this.isAnAdmin()} */}
           </div>
         )
       }

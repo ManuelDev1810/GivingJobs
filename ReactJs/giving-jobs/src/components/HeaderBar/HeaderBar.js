@@ -17,7 +17,7 @@ class HeaderBar extends Component{
             return (
                 <div className="justify-content-end col-2">
                     <p>Hello {JSON.parse(sessionStorage.user).userName}  <a href="#" onClick={() => this.logout()}>Logout</a></p>
-                    <Link to='/CreateJob'>Create Job</Link>
+                    <Link  to='/CreateJob'>Create Job</Link>
                 </div>
             )
         } else {

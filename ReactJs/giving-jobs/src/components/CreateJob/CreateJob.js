@@ -8,6 +8,7 @@ class CreateJob extends Component {
       super();
       this.state = {categories: []}
       this.submitData = this.submitData.bind(this)
+      this.onHandleCreateJob = this.onHandleCreateJob.bind(this)
     }
     
     componentWillMount(){
@@ -37,8 +38,12 @@ class CreateJob extends Component {
 
         fetch('https://localhost:44365//api/home', post)
             .then(response => response.json())
-            .then(response => console.log(response))
+            .then(data => this.onHandleCreateJob(data))
             .then(this.props.history.push('/'))
+    }
+
+    onHandleCreateJob(job){
+        this.props.addNewJob(job)
     }
 
     render(){
