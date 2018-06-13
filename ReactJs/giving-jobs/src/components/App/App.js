@@ -14,10 +14,17 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-       user: sessionStorage.getItem('user') || null
+       user: sessionStorage.getItem('user') || null,
+       jobs: [],
+       loading: true
     }
-
     this.logIn = this.logIn.bind(this);
+  }
+
+  componentWillMount(){
+    fetch('https://localhost:44365/api/home')
+    .then(response => response.json())
+    .then(data => this.setState({jobs: data, loading: false}))
   }
 
   logIn(user){
@@ -38,7 +45,7 @@ class App extends Component {
       <Router>
         <div className="container">
             <HeaderBar user={this.state.user} logout={this.logIn} />
-            <Route exact path="/" render={props => <Jobs {...props} />} />
+            <Route exact path="/" render={props => <Jobs {...props} jobs={this.state.jobs} loading={this.state.loading} />} />
             <Route path="/CreateJob" render={props => <CreateJob {... props} />} />
             <Route path="/Login" render={props => <Login {...props} user={this.state.user} logIn={this.logIn} />} />
             <Route path="/Register" render={props => <Register {...props} />}/>

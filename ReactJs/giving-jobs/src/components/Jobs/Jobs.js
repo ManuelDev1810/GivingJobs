@@ -7,22 +7,11 @@ class Jobs extends Component{
     constructor(props){
         super(props);
         this.state = {
-          jobs: [],
-          categories: [],
-          loading: true
+          categories: []
         }
     }
 
     componentWillMount(){
-      fetch('https://localhost:44365/api/home')
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          jobs: data,
-          loading: false
-        });
-      })
-
       fetch('https://localhost:44365/api/category')
       .then(resposne => resposne.json())
       .then(data => {
@@ -91,9 +80,9 @@ class Jobs extends Component{
       
       render() {
         
-        let content = this.state.loading
+        let content = this.props.loading
         ? <p><em>Loading...</em></p>
-        : Jobs.renderJobsTable(this.state.jobs, this.state.categories, this.props);
+        : Jobs.renderJobsTable(this.props.jobs, this.state.categories, this.props);
         return(
           <div>
             {content}
