@@ -30,26 +30,26 @@ class Register extends Component {
     render(){
         return(
             <div>
-                <a className="w-25"><Link to="/">Home</Link></a>
+                <Link className="w-25" to="/">Home</Link>
                 <hr />
                 <h2>Register</h2>
                 <form className="">
                     <div className="form-group">
-                        <label for="name">Name</label>
+                        <label htmlFor="name">Name</label>
                         <input className="form-control" type="text" id="name" ref={(name) => this.name = name}/>
                     </div>
 
                     <div className="form-group">
-                        <label for="email">Email</label>
+                        <label htmlFor="email">Email</label>
                         <input className="form-control" type="text" id="email" ref={(email) => this.email = email} />
                     </div>
 
                     <div className="form-group">
-                        <label for="password">Password</label>
+                        <label htmlFor="password">Password</label>
                         <input className="form-control" type="password" id="password" ref={(password) => this.password = password} />
                     </div>
 
-                    <input onClick={this.register} className="btn btn-primary" value="Submit" />
+                    <input onClick={this.register} className="btn btn-primary" defaultValue="Submit" />
                 </form>
             </div>
         )

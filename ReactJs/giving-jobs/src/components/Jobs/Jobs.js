@@ -80,7 +80,7 @@ class Jobs extends Component{
                     <div className="card-body d-flex flex-column">
                         <h3 className="card-title">Categories</h3>
                         {state.categories.map(category => 
-                          <Link className="btn btn-success mb-3" to={{pathname: '/Category', state:{id: category.id}}}>{category.name}</Link>
+                          <Link key={category.id} className="btn btn-success mb-3" to={{pathname: '/Category', state:{id: category.id}}}>{category.name}</Link>
                         )}
                     </div>
                 </div> 

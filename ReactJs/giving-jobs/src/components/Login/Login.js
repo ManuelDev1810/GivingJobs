@@ -8,10 +8,6 @@ class Login extends Component{
         this.onHandleUser = this.onHandleUser.bind(this);
     }
 
-    componentWillMount(){
-        console.log(this.props.user)
-    }
-
     login(){
         let emailInput = this.email.value
         let passwordInput = this.password.value
@@ -38,22 +34,22 @@ class Login extends Component{
     render(){
         return(
             <div>
-                <a className="w-25"><Link to="/">Home</Link></a>
-                <a className="w-35 ml-3"><Link to="/Register">Register</Link></a>
+                <Link className="w-25"  to="/">Home</Link>
+                <Link to="/Register" className="w-35 ml-3">Register</Link>
                 <hr />
                 <h2>Log in</h2>
                 <form className="">
                     <div className="form-group">
-                        <label for="email">Email</label>
+                        <label htmlFor="email">Email</label>
                         <input className="form-control" type="text" id="email" ref={(email) => this.email = email} />
                     </div>
 
                     <div className="form-group">
-                        <label for="password">Password</label>
+                        <label htmlFor="password">Password</label>
                         <input className="form-control" type="password" id="password" ref={(password) => this.password = password} />
                     </div>
 
-                    <input onClick={this.login} className="btn btn-primary" value="Submit" />
+                    <input onClick={this.login} className="btn btn-primary" defaultValue="Submit" />
                 </form>
             </div>
         )

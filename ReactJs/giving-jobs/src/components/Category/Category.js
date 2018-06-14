@@ -29,7 +29,6 @@ class Category extends Component{
             <h4>Description</h4>
             <p>{state.category.description}</p>
             <h4>Jobs</h4>
-            {console.log(state.jobs)}
             {state.jobs.map(job => 
                 <div key={job.id}>
                     <h5>{job.id}</h5>
@@ -47,7 +46,6 @@ class Category extends Component{
         return(
             <div>
                 <p>No Category was found</p>
-                {console.log(state.jobsOfCategories)}
             </div>
         )
     }
@@ -56,7 +54,7 @@ class Category extends Component{
         let content = this.state.category ? Category.renderJosbOfCategory(this.state) : Category.renderNotFound(this.state)
         return(
             <div>
-                <a className="w-25"><Link to="/">Home</Link></a>
+                <Link className="w-25" to="/">Home</Link>
                 <hr />
                 {content}
             </div>    

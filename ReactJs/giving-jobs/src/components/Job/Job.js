@@ -22,7 +22,7 @@ class Job extends Component {
     static renderJob(state){
         return(
         <div>
-            <a className="w-25"><Link to="/">Home</Link></a>
+            <Link className="w-25" to="/">Home</Link>
             <hr />
             <p>{state.job.id}</p>
             <p>{state.job.name}</p>
@@ -37,9 +37,9 @@ class Job extends Component {
     static renderNotFound(){
         return(
             <div>
-                <a className="w-25"><Link to="/">Home</Link></a>
+                <Link className="w-25" to="/">Home</Link>
                 <hr />
-                <p>No job was found</p>
+                <p>Loading</p>
             </div>
         )
     }
