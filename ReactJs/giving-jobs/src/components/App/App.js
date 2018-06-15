@@ -9,6 +9,7 @@ import Job from '../Job/Job'
 import Jobs from '../Jobs/Jobs'
 import Profile from '../Profile/Profile'
 import EditPosts from '../EditPosts/EditPosts'
+import EditPost from '../EditPost/EditPost'
 import {Route, BrowserRouter as Router } from 'react-router-dom'
 
 class App extends Component {
@@ -116,6 +117,7 @@ class App extends Component {
                 goneOfProfile={this.goneOfProfile} />} />
             <Route path="/EditPosts" render={props => <EditPosts {...props} jobs={this.state.jobs}
                 isAnAdmin={this.state.isAnAdmin} onIsAnAdmin={this.onIsAnAdmin} user={this.state.user} />} />
+            <Route path="/EditPost" render={props => <EditPost {...props} />} />
         </div>
       </Router>
     )

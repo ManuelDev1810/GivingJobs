@@ -17,8 +17,8 @@ class EditPosts extends  Component{
         return(dateCreated.toDateString())
     }
 
-    renderJobs(){
-        if(this.props.isAnAdmin){
+    renderJobs(isAnAdmin, user, jobs){
+        if(isAnAdmin){
             return(
                 <div>
                     <table className="table col-8">
@@ -34,11 +34,11 @@ class EditPosts extends  Component{
                         </thead>
     
                         <tbody>
-                        {this.props.jobs.map(job => 
+                        {jobs.map(job => 
                                 <tr key={job.id}>
                                     <td>{job.name}</td><td>{this.date(job.date)}</td>
                                     <td>{job.category.name}</td>
-                                    <td><Link className="btn btn-info" to="#">Edit</Link></td>
+                                    <td><Link className="btn btn-info" to={{pathname:'/EditPost', state:{isAnAdmin, job, user}}}>Edit</Link></td>
                                     <td><Link className="btn btn-danger" to="#">Delete</Link></td>
                                 </tr>
                         )}
@@ -57,7 +57,7 @@ class EditPosts extends  Component{
                 <hr />
                 <h1>EditPosts</h1>  
                 {this.props.isAnAdmin ? <h4>{`Admin: ${JSON.parse(this.props.user).userName}`}</h4> : ''}
-                {this.renderJobs()}
+                {this.renderJobs(this.props.isAnAdmin, JSON.parse(this.props.user), this.props.jobs)}
             </div>
         )
     }
