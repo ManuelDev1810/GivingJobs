@@ -8,6 +8,10 @@ class Profile extends Component {
         this.sendData = this.sendData.bind(this)
     }
 
+    componentWillMount(){
+        console.log(this.props.isAnAdmin)
+    }
+
     componentWillUnmount(){
         this.props.goneOfProfile();
     }
@@ -46,7 +50,8 @@ class Profile extends Component {
         if(user){
             return(
                 <div>
-                    <h2>{`User: ${user.userName}`}</h2>
+                    {this.props.isAnAdmin ? <h2>{`Admin: ${user.userName}`}</h2> : <h2>{`User: ${user.userName}`}</h2>}
+                    <h4>Edit Information</h4>
                     <div className="form-group">
                         <input type="hidden" className="form-control w-50" id="id" defaultValue={user.userName} disabled/>
                         <input type="hidden" className="form-control w-50" id="id" defaultValue={user.id} disabled/>
@@ -63,8 +68,10 @@ class Profile extends Component {
                         <label htmlFor="pass">Password</label>
                         <input type="password" className="form-control w-50" id="pass" ref={password => this.password = password}/>
                     </div>
-                    {this.props.successfulEditing ? <div className="alert alert-success" role="alert">Editacion exitosa</div> : console.log('no')}
+                    {this.props.successfulEditing ? <div className="alert alert-success" role="alert">Editacion exitosa</div> : ''}
                     <button className="btn btn-primary btn-lg" onClick={this.sendData}>Edit</button>
+                    <div></div>
+                    {this.props.isAnAdmin ? <Link to="EditPosts" className="btn btn-secondary btn-lg mt-3">Edit / Delete Jobs</Link>: ''}
                 </div>
             )
         }else {

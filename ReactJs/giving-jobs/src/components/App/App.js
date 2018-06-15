@@ -8,6 +8,7 @@ import Category from '../Category/Category'
 import Job from '../Job/Job'
 import Jobs from '../Jobs/Jobs'
 import Profile from '../Profile/Profile'
+import EditPosts from '../EditPosts/EditPosts'
 import {Route, BrowserRouter as Router } from 'react-router-dom'
 
 class App extends Component {
@@ -46,7 +47,7 @@ class App extends Component {
     fetch('https://localhost:44365/api/home')
     .then(response => response.json())
     .then(data => this.setState({jobs: data, loading: false}))
-    // this.onIsAnAdmin();
+    this.onIsAnAdmin();
   }
 
   onIsAnAdmin(){
@@ -103,7 +104,7 @@ class App extends Component {
         <div className="container">
             <HeaderBar user={this.state.user} logout={this.logIn} />
             <Route exact path="/" render={props => <Jobs {...props} jobs={this.state.jobs} 
-                loading={this.state.loading} onIsAnAdmin={this.onIsAnAdmin} isAnAdmin={this.state.isAnAdmin} 
+                loading={this.state.loading} 
                 categories={this.state.categories} getJobs={this.getJobs} />} />
             <Route path="/CreateJob" render={props => <CreateJob {... props} addNewJob={this.addNewJob}  />} />
             <Route path="/Login" render={props => <Login {...props} user={this.state.user} logIn={this.logIn} />} />
@@ -113,6 +114,8 @@ class App extends Component {
             <Route path="/Profile" render={props => <Profile {...props} user={this.state.user} 
                 isAnAdmin={this.state.isAnAdmin} editUser={this.editUser} successfulEditing={this.state.successfulEditing}
                 goneOfProfile={this.goneOfProfile} />} />
+            <Route path="/EditPosts" render={props => <EditPosts {...props} jobs={this.state.jobs}
+                isAnAdmin={this.state.isAnAdmin} onIsAnAdmin={this.onIsAnAdmin} user={this.state.user} />} />
         </div>
       </Router>
     )
