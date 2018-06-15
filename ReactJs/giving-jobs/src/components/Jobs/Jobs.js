@@ -1,36 +1,39 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import Job from '../Job/Job'
 
 class Jobs extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-          categories: [],
           search: ''
         }
         this.updateSearch = this.updateSearch.bind(this)
     }
-
-    componentWillMount(){
-      fetch('https://localhost:44365/api/category')
-      .then(resposne => resposne.json())
-      .then(data => {
-        this.setState({
-          categories: data
-        })
-      })
-    }
-
-    isAnAdmin(){
-      fetch('https://localhost:44365/api/account/isAnAdmin')
-      .then(response => response.json())
-      .then(response => console.log(response))
-    }
-
     updateSearch(event){
         this.setState({search: event.target.value.substr(0,20)})
+    }
+
+    static isAdminLabels(admin){
+      if(admin){
+        return(
+          <div>
+            <th scope="col">Edit</th>
+            <th scope="col">Category</th>
+          </div>
+        )
+      }
+    }
+
+    static isAdminButtons(admin){
+      if(admin){
+        return(
+          <div>
+            <th scope="col">Edit</th>
+            <th scope="col">Category</th>
+          </div>
+        )
+      }
     }
 
      static jobComponent(id, props){
@@ -46,8 +49,9 @@ class Jobs extends Component{
     }
 
      static renderJobsTable(jobs, state, props){
+       console.log(jobs)
        let  filteredJobs = jobs.filter(
-            (job) => {
+            job => {
               //Return whatever that is not -1, indexof returns -1 if not find anything.. 
               //So if you cannot get this particular name of the job DONT RETURN ANYTHING
               return job.name.toLowerCase().indexOf(state.search.toLowerCase()) !== -1;
@@ -63,6 +67,7 @@ class Jobs extends Component{
                       <th scope="col">Name</th>
                       <th scope="col">Date</th>
                       <th scope="col">Category</th>
+                      {this.isAdminLabels(props.isAnAdmin)}
                     </tr>
                   </thead>
 
@@ -70,7 +75,9 @@ class Jobs extends Component{
                     {filteredJobs.map(job => 
                           <tr onClick={() => this.jobComponent(job.id, props)} key={job.id}>
                             <td>{job.name}</td><td>{Jobs.date(job.date)}</td>
+                            {/* Como consigo la categoria de trabajo */}
                             <td>{job.category.name}</td>
+                            {/* {this.isAdminButtons(props.isAnAdmin)} */}
                           </tr>
                     )}
                   </tbody>
@@ -79,7 +86,7 @@ class Jobs extends Component{
                   <div className="card col-3">
                     <div className="card-body d-flex flex-column">
                         <h3 className="card-title">Categories</h3>
-                        {state.categories.map(category => 
+                        {props.categories.map(category => 
                           <Link key={category.id} className="btn btn-success mb-3" to={{pathname: '/Category', state:{id: category.id}}}>{category.name}</Link>
                         )}
                     </div>
@@ -89,7 +96,6 @@ class Jobs extends Component{
       }
       
       render() {
-        
         let content = this.props.loading
         ? <p><em>Loading...</em></p>
         : Jobs.renderJobsTable(this.props.jobs, this.state, this.props);
@@ -97,7 +103,6 @@ class Jobs extends Component{
           <div>
             <input className="mb-2 form-control" type="text" name="nombre" placeholder="Search By Name"  onChange={this.updateSearch} />
             {content}
-            {/* {this.isAnAdmin()} */}
           </div>
         )
       }

@@ -78,12 +78,12 @@ namespace GivingJobs.Controllers
             return BadRequest();
         }
 
-        [Route("isAnAdmin")]
+        [Route("{name}")]
         [HttpGet]
-        public async Task<IActionResult> IsAnAdmin()
+        public async Task<IActionResult> IsAnAdmin(string name)
         {
             //User.is
-            AppUser user = await userManager.FindByNameAsync("Manuel");
+            AppUser user = await userManager.FindByNameAsync(name);
             bool yesOrNot = await userManager.IsInRoleAsync(user, "Admin");
             if (yesOrNot)
                 return Ok(yesOrNot);

@@ -39,11 +39,12 @@ class CreateJob extends Component {
         fetch('https://localhost:44365//api/home', post)
             .then(response => response.json())
             .then(data => this.onHandleCreateJob(data))
-            .then(this.props.history.push('/'))
     }
 
     onHandleCreateJob(job){
         this.props.addNewJob(job)
+        window.location.reload()
+        this.props.history.push('/')
     }
 
     render(){
