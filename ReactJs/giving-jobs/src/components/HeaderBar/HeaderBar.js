@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 class HeaderBar extends Component{
     constructor(props){
@@ -16,7 +16,7 @@ class HeaderBar extends Component{
         if(this.props.user){
             return (
                 <div className="justify-content-end col-2">
-                    <p>Hello {JSON.parse(sessionStorage.user).userName}  <a href="#" onClick={() => this.logout()}>Logout</a></p>
+                    <p>Hello {JSON.parse(sessionStorage.user).userName} <Link to="/Profile" className="fas fa-cog"></Link>  <a href="#" onClick={() => this.logout()}>Logout</a></p>
                     <Link  to='/CreateJob'>Create Job</Link>
                 </div>
             )

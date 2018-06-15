@@ -14,10 +14,12 @@ namespace GivingJobs.Controllers
     {
         UserManager<AppUser> userManager;
         SignInManager<AppUser> signInManager;
-        public AccountController(UserManager<AppUser> usrMgr, SignInManager<AppUser> sgManager)
+        IPasswordHasher<AppUser> passwordHasher;
+        public AccountController(UserManager<AppUser> usrMgr, SignInManager<AppUser> sgManager, IPasswordHasher<AppUser> password)
         {
             userManager = usrMgr;
             signInManager = sgManager;
+            passwordHasher = password;
         }
 
         [Route("login")]
@@ -48,6 +50,25 @@ namespace GivingJobs.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [Route("Edit")]
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditModel model)
+        {
+            AppUser user = await userManager.FindByNameAsync(model.OriginalName);
+            if(user != null)
+            {
+                user.UserName = model.Name;
+                user.Email = model.Email;
+                user.PasswordHash = passwordHasher.HashPassword(user, model.Password);
+                IdentityResult result = await userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                    return Ok(user);
+                else
+                    return BadRequest(new { result.Errors });
+            }
+            return BadRequest(user);
         }
 
         [Route("logout")]

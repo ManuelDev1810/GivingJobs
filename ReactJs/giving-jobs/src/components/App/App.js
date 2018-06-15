@@ -26,6 +26,7 @@ class App extends Component {
     this.onIsAnAdmin = this.onIsAnAdmin.bind(this);
     this.onHandleAdmin = this.onHandleAdmin.bind(this);
     this.getJobs = this.getJobs.bind(this)
+    this.editUser = this.editUser.bind(this);
   }
 
   componentWillMount(){
@@ -40,11 +41,10 @@ class App extends Component {
   }
 
   getJobs(){
-    console.log('hola')
     fetch('https://localhost:44365/api/home')
     .then(response => response.json())
     .then(data => this.setState({jobs: data, loading: false}))
-    this.onIsAnAdmin();
+    // this.onIsAnAdmin();
   }
 
   onIsAnAdmin(){
@@ -73,10 +73,22 @@ class App extends Component {
       sessionStorage.clear()
       this.setState({user: null, isAnAdmin: false})
     }
+    console.log(this.state.user)
   }
 
   addNewJob(job){
     this.setState({jobs: [...this.state.jobs, job]})
+  }
+
+  editUser(user){
+    console.log(user)
+    // fetch('https://localhost:44365/api/account/edit', user)
+    // .then(response => response.json())
+    // .then(data => {
+    //   sessionStorage.setItem('user', JSON.stringify(data))
+    //   let user = JSON.parse(sessionStorage.getItem('user'))
+    //   this.setState({user})
+    // })
   }
 
   render(){
@@ -92,7 +104,8 @@ class App extends Component {
             <Route path="/Register" render={props => <Register {...props} />}/>
             <Route path="/Job" render={props => <Job {...props} />} />
             <Route path="/Category" render={props => <Category {...props} />} />
-            <Route path="/Profile" render={props => <Profile {...props} user={this.state.user} isAnAdmin={this.state.isAnAdmin} />} />
+            <Route path="/Profile" render={props => <Profile {...props} user={this.state.user} 
+                isAnAdmin={this.state.isAnAdmin} editUser={this.editUser} />} />
         </div>
       </Router>
     )

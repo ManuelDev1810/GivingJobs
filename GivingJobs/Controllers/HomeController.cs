@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using GivingJobs.Models;
@@ -23,7 +24,7 @@ namespace GivingJobs.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            IEnumerable<Job> Jobs = await jobRepository.Jobs();
+            List<Job> Jobs = await jobRepository.Jobs();
             foreach (var job in Jobs)
             {
                 job.Category = await categoryRepository.GetById(job.CategoryId);

@@ -4,6 +4,7 @@ using GivingJobs.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace GivingJobs.Services.Repositories
             dbContext = applicationDb;
         }
 
-        public async Task<IEnumerable<Job>> Jobs() => await dbContext.Jobs.ToListAsync();
+        public async Task<List<Job>> Jobs() => await dbContext.Jobs.ToListAsync();
 
         public async Task<Job> Get(int id)
         {

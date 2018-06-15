@@ -25,17 +25,6 @@ class Jobs extends Component{
       }
     }
 
-    static isAdminButtons(admin){
-      if(admin){
-        return(
-          <div>
-            <th scope="col">Edit</th>
-            <th scope="col">Category</th>
-          </div>
-        )
-      }
-    }
-
      static jobComponent(id, props){
       props.history.push({
         pathname: '/Job',
@@ -49,7 +38,6 @@ class Jobs extends Component{
     }
 
      static renderJobsTable(jobs, state, props){
-       console.log(jobs)
        let  filteredJobs = jobs.filter(
             job => {
               //Return whatever that is not -1, indexof returns -1 if not find anything.. 
@@ -67,7 +55,6 @@ class Jobs extends Component{
                       <th scope="col">Name</th>
                       <th scope="col">Date</th>
                       <th scope="col">Category</th>
-                      {this.isAdminLabels(props.isAnAdmin)}
                     </tr>
                   </thead>
 
@@ -75,9 +62,7 @@ class Jobs extends Component{
                     {filteredJobs.map(job => 
                           <tr onClick={() => this.jobComponent(job.id, props)} key={job.id}>
                             <td>{job.name}</td><td>{Jobs.date(job.date)}</td>
-                            {/* Como consigo la categoria de trabajo */}
                             <td>{job.category.name}</td>
-                            {/* {this.isAdminButtons(props.isAnAdmin)} */}
                           </tr>
                     )}
                   </tbody>

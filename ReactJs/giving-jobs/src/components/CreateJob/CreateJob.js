@@ -28,7 +28,7 @@ class CreateJob extends Component {
         let categoryInput = this.category.value
         
         let post = {
-            method: "POST",
+            method: 'POST',
             headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ class CreateJob extends Component {
     render(){
         return(
             <div>
-                <a className="w-25"><Link to="/">Home</Link></a>
+                <Link className="w-25" to="/">Home</Link>
                 <hr />
                 <h2>Create a Job</h2>
                 <form className="">

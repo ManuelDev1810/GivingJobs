@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +14,6 @@ namespace GivingJobs.Models
         public string Description { get; set; }
         public DateTime Date { get; set; }
         [NotMapped]
-        public IEnumerable<Job> Jobs { get; set; }
+        public ICollection<Job> Jobs { get; set; }
     }
 }
