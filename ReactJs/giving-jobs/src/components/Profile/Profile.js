@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 
 class Profile extends Component {
 
@@ -7,11 +8,21 @@ class Profile extends Component {
         this.sendData = this.sendData.bind(this)
     }
 
+    componentWillUnmount(){
+        this.props.goneOfProfile();
+    }
+
     sendData(){
         let name = this.name.value
         let email = this.email.value
         let password = this.password.value
-        let originalName = JSON.parse(this.props.user).userName
+        let originalName =  ''
+
+        if(Object.prototype.toString.call(this.props.user) === "[object String]"){
+            originalName = JSON.parse(this.props.user).userName
+        } else {
+            originalName = this.props.user.userName
+        }
 
         let post = {
             method: 'POST',
@@ -35,7 +46,6 @@ class Profile extends Component {
         if(user){
             return(
                 <div>
-                    <p>Primero haz que el usuario pueda actualizar sus datos y despues un commit</p>
                     <h2>{`User: ${user.userName}`}</h2>
                     <div className="form-group">
                         <input type="hidden" className="form-control w-50" id="id" defaultValue={user.userName} disabled/>
@@ -51,8 +61,9 @@ class Profile extends Component {
                     </div>
                     <div className="form-group">
                         <label htmlFor="pass">Password</label>
-                        <input type="text" className="form-control w-50" id="pass" ref={password => this.password = password}/>
+                        <input type="password" className="form-control w-50" id="pass" ref={password => this.password = password}/>
                     </div>
+                    {this.props.successfulEditing ? <div className="alert alert-success" role="alert">Editacion exitosa</div> : console.log('no')}
                     <button className="btn btn-primary btn-lg" onClick={this.sendData}>Edit</button>
                 </div>
             )
@@ -64,8 +75,10 @@ class Profile extends Component {
     render(){
         return(
             <div>
-                <h2>User</h2>
+                <Link className="w-25" to="/">Home</Link>
+                <hr />
                 {this.infoUser()}
+                
             </div>
         )
     }

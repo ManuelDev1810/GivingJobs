@@ -19,14 +19,16 @@ class App extends Component {
        jobs: [],
        categories: [],
        loading: true,
-       isAnAdmin: false
+       isAnAdmin: false,
+       successfulEditing: false
     }
     this.logIn = this.logIn.bind(this);
     this.addNewJob = this.addNewJob.bind(this);
     this.onIsAnAdmin = this.onIsAnAdmin.bind(this);
     this.onHandleAdmin = this.onHandleAdmin.bind(this);
-    this.getJobs = this.getJobs.bind(this)
+    this.getJobs = this.getJobs.bind(this);
     this.editUser = this.editUser.bind(this);
+    this.goneOfProfile = this.goneOfProfile.bind(this);
   }
 
   componentWillMount(){
@@ -82,13 +84,17 @@ class App extends Component {
 
   editUser(user){
     console.log(user)
-    // fetch('https://localhost:44365/api/account/edit', user)
-    // .then(response => response.json())
-    // .then(data => {
-    //   sessionStorage.setItem('user', JSON.stringify(data))
-    //   let user = JSON.parse(sessionStorage.getItem('user'))
-    //   this.setState({user})
-    // })
+    fetch('https://localhost:44365/api/account/edit', user)
+    .then(response => response.json())
+    .then(data => {
+      sessionStorage.setItem('user', JSON.stringify(data))
+      let user = JSON.parse(sessionStorage.getItem('user'))
+      this.setState({user, successfulEditing:true})
+    }).catch(e => console.log(e.message))
+  }
+
+  goneOfProfile(){
+    this.setState({successfulEditing:false})
   }
 
   render(){
@@ -105,7 +111,8 @@ class App extends Component {
             <Route path="/Job" render={props => <Job {...props} />} />
             <Route path="/Category" render={props => <Category {...props} />} />
             <Route path="/Profile" render={props => <Profile {...props} user={this.state.user} 
-                isAnAdmin={this.state.isAnAdmin} editUser={this.editUser} />} />
+                isAnAdmin={this.state.isAnAdmin} editUser={this.editUser} successfulEditing={this.state.successfulEditing}
+                goneOfProfile={this.goneOfProfile} />} />
         </div>
       </Router>
     )
