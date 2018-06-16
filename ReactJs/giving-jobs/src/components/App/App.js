@@ -113,7 +113,7 @@ class App extends Component {
             <Route exact path="/" render={props => <Jobs {...props} jobs={this.state.jobs} 
                 loading={this.state.loading} 
                 categories={this.state.categories} getJobs={this.getJobs} />} />
-            <Route path="/CreateJob" render={props => <CreateJob {... props} addNewJob={this.addNewJob}  />} />
+            <Route path="/CreateJob" render={props => <CreateJob {... props} addNewJob={this.addNewJob} user={this.state.user} />} />
             <Route path="/Login" render={props => <Login {...props} user={this.state.user} logIn={this.logIn} />} />
             <Route path="/Register" render={props => <Register {...props} />}/>
             <Route path="/Job" render={props => <Job {...props} />} />

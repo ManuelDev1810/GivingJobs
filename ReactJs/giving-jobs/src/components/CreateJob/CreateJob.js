@@ -12,6 +12,7 @@ class CreateJob extends Component {
     }
     
     componentWillMount(){
+        this.props.user || this.props.history.push('/')
         fetch('https://localhost:44365/api/category')
         .then(resposne => resposne.json())
         .then(data => {
