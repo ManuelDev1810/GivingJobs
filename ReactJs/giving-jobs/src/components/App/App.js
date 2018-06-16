@@ -52,7 +52,12 @@ class App extends Component {
   }
 
   onIsAnAdmin(){
-    var user = JSON.parse(this.state.user)
+    var user = {}
+    if(Object.prototype.toString.call(this.state.user) === "[object String]"){
+        user = JSON.parse(this.state.user)
+    } else {
+      user = this.state.user
+    }
     if(user != null || user != undefined){
         fetch('https://localhost:44365/api/account/' + user.userName)
         .then(response => response.json())
@@ -73,6 +78,7 @@ class App extends Component {
         sessionStorage.setItem('user', JSON.stringify(user))
         let data = JSON.parse(sessionStorage.getItem('user'))
         this.setState({user: data})
+        this.onIsAnAdmin();
     } else {
       sessionStorage.clear()
       this.setState({user: null, isAnAdmin: false})

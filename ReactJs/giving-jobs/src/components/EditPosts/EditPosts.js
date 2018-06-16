@@ -79,8 +79,8 @@ class EditPosts extends  Component{
             <div>
                 <Link className="w-25" to="/">Home</Link>
                 <hr />
-                {this.props.isAnAdmin ? <h4>{`Admin: ${JSON.parse(this.props.user).userName}`}</h4> : ''}
-                {this.renderJobs(this.props.isAnAdmin, JSON.parse(this.props.user), this.props.jobs)}
+                {this.props.isAnAdmin ? <h4>{`Admin: ${this.props.user.userName}`}</h4> : ''}
+                {this.renderJobs(this.props.isAnAdmin, this.props.user, this.props.jobs)}
             </div>
         )
     }

@@ -64,7 +64,7 @@ class Jobs extends Component{
                             <td>{job.name}</td><td>{Jobs.date(job.date)}</td>
                             <td>{job.category.name}</td>
                           </tr>
-                    )}
+                    ).reverse()}
                   </tbody>
                   
               </table>
