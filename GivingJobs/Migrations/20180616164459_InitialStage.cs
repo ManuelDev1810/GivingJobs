@@ -32,7 +32,8 @@ namespace GivingJobs.Migrations
                     Name = table.Column<string>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
+                    userName = table.Column<string>(nullable: false),
+                    userEmail = table.Column<string>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

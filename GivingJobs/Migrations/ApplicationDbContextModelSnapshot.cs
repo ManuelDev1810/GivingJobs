@@ -52,6 +52,12 @@ namespace GivingJobs.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
+                    b.Property<string>("userEmail")
+                        .IsRequired();
+
+                    b.Property<string>("userName")
+                        .IsRequired();
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");

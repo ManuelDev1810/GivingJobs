@@ -13,6 +13,7 @@ class CreateJob extends Component {
     
     componentWillMount(){
         this.props.user || this.props.history.push('/')
+
         fetch('https://localhost:44365/api/category')
         .then(resposne => resposne.json())
         .then(data => {
@@ -24,9 +25,11 @@ class CreateJob extends Component {
 
     submitData(){
         let nameInput = this.name.value
-        let descriptionInput = this.email.value
-        let emailInput = this.description.value
+        let descriptionInput = this.description.value
         let categoryInput = this.category.value
+        let userName = this.props.user.userName == undefined ? JSON.parse(this.props.user).userName : this.props.user.userName
+        let userEmail = this.props.user.email == undefined ? JSON.parse(this.props.user).email : this.props.user.email
+    
         
         let post = {
             method: 'POST',
@@ -34,12 +37,13 @@ class CreateJob extends Component {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-            body: JSON.stringify({name: nameInput, description: descriptionInput, email: emailInput, categoryId: categoryInput})
+            body: JSON.stringify({name: nameInput, description: descriptionInput, categoryId: categoryInput, userName, userEmail})
         }
 
         fetch('https://localhost:44365//api/home', post)
             .then(response => response.json())
             .then(data => this.onHandleCreateJob(data))
+            .then(() => console.log(post))
     }
 
     onHandleCreateJob(job){
@@ -61,11 +65,6 @@ class CreateJob extends Component {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input className="form-control" type="text" id="email" ref={(email) => this.email = email} />
-                    </div>
-
-                    <div className="form-group">
                         <label htmlFor="categories">Category</label>
                         <select id="categories" className="form-control" ref={category => this.category = category}>
                            {this.state.categories.map(category =>
@@ -79,7 +78,7 @@ class CreateJob extends Component {
                         <textarea className="form-control" id="description" ref={(description) => this.description = description}></textarea>
                     </div>
 
-                    <input onClick={this.submitData} className="btn btn-primary" value="Submit" />
+                    <input onClick={this.submitData} className="btn btn-primary" defaultValue="Submit"  />
                 </form>
             </div>
         )

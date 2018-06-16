@@ -19,6 +19,7 @@ class Job extends Component {
         }
     }
 
+
     static renderJob(state){
         return(
         <div>
@@ -30,6 +31,7 @@ class Job extends Component {
             <p>{state.job.description}</p>
             <p>{state.job.email}</p>
             <p>{state.job.category.name}</p>
+            <p>Enviar CV e informacion a <b>{state.job.userEmail}</b></p>
         </div>
         )
     }

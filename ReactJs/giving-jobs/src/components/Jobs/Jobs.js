@@ -10,6 +10,7 @@ class Jobs extends Component{
         }
         this.updateSearch = this.updateSearch.bind(this)
     }
+
     updateSearch(event){
         this.setState({search: event.target.value.substr(0,20)})
     }

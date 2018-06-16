@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GivingJobs.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180615134653_ChanginfFieldOfJobs")]
-    partial class ChanginfFieldOfJobs
+    [Migration("20180616164459_InitialStage")]
+    partial class InitialStage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,10 +51,13 @@ namespace GivingJobs.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<string>("Name")
+                    b.Property<string>("userEmail")
+                        .IsRequired();
+
+                    b.Property<string>("userName")
                         .IsRequired();
 
                     b.HasKey("Id");
@@ -67,7 +70,7 @@ namespace GivingJobs.Migrations
             modelBuilder.Entity("GivingJobs.Models.Job", b =>
                 {
                     b.HasOne("GivingJobs.Models.Category", "Category")
-                        .WithMany("Jobs")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
