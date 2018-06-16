@@ -109,7 +109,7 @@ namespace GivingJobs.Controllers
             if (yesOrNot)
                 return Ok(yesOrNot);
             else
-                return BadRequest();
+                return Ok(yesOrNot);
         }
 
         void AddErrosFromResult(IdentityResult result)

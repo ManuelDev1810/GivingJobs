@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 class EditPosts extends  Component{
 
@@ -10,11 +10,6 @@ class EditPosts extends  Component{
         }
         this.updateSearch = this.updateSearch.bind(this)
         this.deleteJob = this.deleteJob.bind(this)
-    }
-
-    componentWillMount(){
-        this.props.onIsAnAdmin()
-        console.log(this.props.isAnAdmin)
     }
 
     date(date){
@@ -33,17 +28,15 @@ class EditPosts extends  Component{
     }
 
     renderJobs(isAnAdmin, user, jobs){
-
         let filteredJobs = jobs.filter(
             job => {
                 return job.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
             }
         );
-
         if(isAnAdmin){
-            return(
-                <div>
-                    <h1>EditPosts</h1>
+        return(
+            <div>
+                    <h1>Edit Posts</h1>
                     <input type="text" className="form-control mb-3" placeholder="Search" onChange={this.updateSearch} />  
                     <table className="table col-8">
                         <thead className="thead-dark">
@@ -69,6 +62,7 @@ class EditPosts extends  Component{
                         </tbody>
                         
                     </table>
+                    
                 </div>
             )
         }
@@ -79,7 +73,7 @@ class EditPosts extends  Component{
             <div>
                 <Link className="w-25" to="/">Home</Link>
                 <hr />
-                {this.props.isAnAdmin ? <h4>{`Admin: ${this.props.user.userName}`}</h4> : ''}
+                {this.props.isAnAdmin ? <h4>{`Admin: ${Object.prototype.toString.call(this.props.user) === "[object String]" ? JSON.parse(this.props.user).userName : this.props.user.userName} `}</h4> : ''}
                 {this.renderJobs(this.props.isAnAdmin, this.props.user, this.props.jobs)}
             </div>
         )

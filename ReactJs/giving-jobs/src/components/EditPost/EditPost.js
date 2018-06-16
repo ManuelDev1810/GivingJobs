@@ -9,15 +9,20 @@ class EditPost extends Component {
             categories: []
         }
         this.editJob = this.editJob.bind(this)
+        this.renderPost = this.renderPost.bind(this)
     }
 
     componentWillMount(){
-        console.log(this.props.location.state.job)
-        fetch('https://localhost:44365/api/category')
-        .then(resposne => resposne.json())
-        .then(data => {
-           this.setState({categories: data})
-        })
+        this.props.getJobs()
+        if(this.props.location.state == undefined){
+            this.props.history.push('/')
+        } else {
+            fetch('https://localhost:44365/api/category')
+            .then(resposne => resposne.json())
+            .then(data => {
+               this.setState({categories: data})
+            })
+        }
     }
 
     editJob(){
@@ -40,10 +45,14 @@ class EditPost extends Component {
         .then(() => this.props.history.push('/EditPosts'))
     }
 
-    render(){
+    renderPost(){
+
         let props = this.props.location.state;
-        return(
-            <div>
+        if(props == undefined){
+            this.props.history.push('/')
+        } else {
+            return(
+                <div>
                 <Link className="w-25" to="/">Home</Link>
                 <hr />
                 <h2>{`Edit: ${props.job.name}`}</h2>
@@ -70,6 +79,15 @@ class EditPost extends Component {
                     </div>
                 </div>
                 <button className="btn btn-primary" onClick={this.editJob}>Edit</button>
+            </div>
+            )
+        }
+    }
+
+    render(){
+        return(
+            <div>
+                {this.renderPost()}
             </div>
         )
     }

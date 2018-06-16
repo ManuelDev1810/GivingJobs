@@ -59,6 +59,7 @@ class App extends Component {
       user = this.state.user
     }
     if(user != null || user != undefined){
+        console.log(user.userName)
         fetch('https://localhost:44365/api/account/' + user.userName)
         .then(response => response.json())
         .then(response => this.onHandleAdmin(response))
@@ -122,7 +123,8 @@ class App extends Component {
                 isAnAdmin={this.state.isAnAdmin} editUser={this.editUser} successfulEditing={this.state.successfulEditing}
                 goneOfProfile={this.goneOfProfile} />} />
             <Route path="/EditPosts" render={props => <EditPosts {...props} jobs={this.state.jobs}
-                isAnAdmin={this.state.isAnAdmin} onIsAnAdmin={this.onIsAnAdmin} user={this.state.user} getJobs={this.getJobs} />} />
+                isAnAdmin={this.state.isAnAdmin} onIsAnAdmin={this.onIsAnAdmin} user={this.state.user} getJobs={this.getJobs}
+                onHandleAdmin={this.onHandleAdmin} />} />
             <Route path="/EditPost" render={props => <EditPost {...props} getJobs={this.getJobs} />} />
         </div>
       </Router>
