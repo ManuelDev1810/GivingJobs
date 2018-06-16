@@ -16,9 +16,6 @@ namespace GivingJobs.Models
         [Required]
         public string Description { get; set; }
         [Required]
-        public string Email { get; set; }
-
-        [Required]
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }

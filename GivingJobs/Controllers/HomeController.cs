@@ -56,19 +56,10 @@ namespace GivingJobs.Controllers
                 return BadRequest();
         }
 
-        [Route("id")]
-        public async Task<IActionResult> Edit(int id)
-        {
-            Job job = await jobRepository.Get(id);
-            if (job != null)
-                return Ok(job);
-            else
-                return BadRequest();
-        }
-
         [HttpPut]
         public async Task<IActionResult> Edit(Job model)
         {
+            //Job Model = await jobRepository.Get(id);
             Job job = await jobRepository.Edit(model);
             if (job != null)
                 return Ok(job);
@@ -76,6 +67,7 @@ namespace GivingJobs.Controllers
                 return BadRequest();
         }
 
+        [Route("delete/{id}")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {

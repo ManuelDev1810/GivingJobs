@@ -48,9 +48,14 @@ namespace GivingJobs.Services.Repositories
         
         public async Task<Job> Edit(Job job)
         {
-            dbContext.Entry(job).State = EntityState.Modified;
-            await dbContext.SaveChangesAsync();
-            return job;
+            try { 
+                dbContext.Entry(job).State = EntityState.Modified;
+                await dbContext.SaveChangesAsync();
+                return job;
+            }catch(Exception e)
+            {
+                throw e;
+            }
         }
 
         public async Task<Job> Delete(Job job)
