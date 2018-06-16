@@ -84,7 +84,6 @@ class App extends Component {
       sessionStorage.clear()
       this.setState({user: null, isAnAdmin: false})
     }
-    console.log(this.state.user)
   }
 
   addNewJob(job){
