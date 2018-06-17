@@ -43,7 +43,7 @@ class Jobs extends Component{
             job => {
               //Return whatever that is not -1, indexof returns -1 if not find anything.. 
               //So if you cannot get this particular name of the job DONT RETURN ANYTHING
-              return job.name.toLowerCase().indexOf(state.search.toLowerCase()) !== -1;
+              return job.location.toLowerCase().indexOf(state.search.toLowerCase()) !== -1;
             }
        ).reverse();
         return(
@@ -53,18 +53,22 @@ class Jobs extends Component{
     
                   <thead className="thead-dark">
                     <tr>
-                      <th scope="col">Name</th>
-                      <th scope="col">Date</th>
+                      <th scope="col">Location</th>
+                      <th scope="col">Postiion</th>
+                      <th scope="col">Company</th>
                       <th scope="col">Category</th>
+                      <th scope="col">Date</th>
                     </tr>
                   </thead>
 
                   <tbody>
                     {filteredJobs.map(job => 
                           <tr onClick={() => this.jobComponent(job.id, props)} key={job.id}>
-                            <td>{job.name}</td>
-                            <td>{Jobs.date(job.date)}</td>
+                            <td>{job.location}</td>
+                            <td>{job.position}</td>
+                            <td>{job.company}</td>
                             <td>{job.category.name}</td>
+                            <td>{Jobs.date(job.date)}</td>
                           </tr>
                     ).reverse()}
                   </tbody>
@@ -88,7 +92,7 @@ class Jobs extends Component{
         : Jobs.renderJobsTable(this.props.jobs, this.state, this.props);
         return(
           <div>
-            <input className="mb-2 form-control" type="text" name="nombre" placeholder="Search By Name"  onChange={this.updateSearch} />
+            <input className="mb-2 form-control w-25" type="text" name="nombre" placeholder="Search By Location"  onChange={this.updateSearch} />
             {content}
           </div>
         )

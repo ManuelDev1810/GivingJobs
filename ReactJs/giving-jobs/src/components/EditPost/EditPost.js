@@ -32,13 +32,18 @@ class EditPost extends Component {
         let categoryId = this.category.value
         let userName = this.userName.value
         let userEmail = this.userEmail.value
+        let company = this.company.value
+        let location = this.location.value
+        let position = this.position.value
+
+
         let put = {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({id,name,description,categoryId,userName,userEmail})
+            body: JSON.stringify({id,name,description,categoryId,userName,userEmail,company,location,position})
         }
         console.log(put)
         console.log(this.props.location.state.job)
@@ -66,6 +71,21 @@ class EditPost extends Component {
                     <div className="form-group">
                         <label htmlFor="id">Name</label>
                         <input type="text" className="form-control w-50" id="id" ref={name => this.name = name}  />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label htmlFor="company">Company</label>
+                        <input className="form-control w-50" type="text" id="company" ref={(company) => this.company = company}/>
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="location">Location</label>
+                        <input className="form-control w-50" type="text" id="location" ref={(location) => this.location = location}/>
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="position">Position</label>
+                        <input className="form-control w-50" type="text" id="position" ref={(position) => this.position = position}/>
                     </div>
 
                      <div className="form-group">

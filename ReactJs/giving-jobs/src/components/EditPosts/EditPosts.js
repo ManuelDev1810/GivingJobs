@@ -41,9 +41,9 @@ class EditPosts extends  Component{
                     <table className="table col-8">
                         <thead className="thead-dark">
                         <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Category</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Postiion</th>
+                            <th scope="col">Company</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
                         </tr>
@@ -52,9 +52,9 @@ class EditPosts extends  Component{
                         <tbody>
                         {filteredJobs.map(job => 
                                 <tr key={job.id}>
-                                    <td>{job.name}</td>
-                                    <td>{this.date(job.date)}</td>
-                                    <td>{job.category.name}</td>
+                                    <td>{job.location}</td>
+                                    <td>{job.position}</td>
+                                    <td>{job.company}</td>
                                     <td><Link className="btn btn-info" to={{pathname:'/EditPost', state:{isAnAdmin, job, user}}}>Edit</Link></td>
                                     <td><button className="btn btn-danger" onClick={() => this.deleteJob(job.id)}>Delete</button></td>
                                 </tr>
