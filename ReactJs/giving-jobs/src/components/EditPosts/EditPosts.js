@@ -30,7 +30,10 @@ class EditPosts extends  Component{
     renderJobs(isAnAdmin, user, jobs){
         let filteredJobs = jobs.filter(
             job => {
-                return job.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+                return (job.location.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 ||
+                        job.position.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 ||
+                        job.company.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 
+                );
             }
         );
         if(isAnAdmin){

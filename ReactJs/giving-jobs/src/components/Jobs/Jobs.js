@@ -43,7 +43,12 @@ class Jobs extends Component{
             job => {
               //Return whatever that is not -1, indexof returns -1 if not find anything.. 
               //So if you cannot get this particular name of the job DONT RETURN ANYTHING
-              return job.location.toLowerCase().indexOf(state.search.toLowerCase()) !== -1;
+              return (job.location.toLowerCase().indexOf(state.search.toLowerCase()) !== -1  || 
+                      job.position.toLowerCase().indexOf(state.search.toLowerCase()) !== -1 ||
+                      job.company.toLowerCase().indexOf(state.search.toLowerCase()) !== -1 ||
+                      job.category.name.toLowerCase().indexOf(state.search.toLowerCase()) !== -1 ||
+                      Jobs.date(job.date).toLowerCase().indexOf(state.search.toLowerCase()) !== -1
+                    );
             }
        ).reverse();
         return(
@@ -92,7 +97,7 @@ class Jobs extends Component{
         : Jobs.renderJobsTable(this.props.jobs, this.state, this.props);
         return(
           <div>
-            <input className="mb-2 form-control w-25" type="text" name="nombre" placeholder="Search By Location"  onChange={this.updateSearch} />
+            <input className="mb-2 form-control" type="text" name="nombre" placeholder="Search"  onChange={this.updateSearch} />
             {content}
           </div>
         )
