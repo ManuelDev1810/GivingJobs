@@ -10,6 +10,7 @@ namespace GivingJobs.Services.Interfaces
     public interface IJobRepository
     {
         Task<List<Job>> Jobs();
+        Task<List<Job>> JobsOfUsers(string name);
         Task<Job> Create(Job job);
         Task<Job> Get(int id);
         Task<IEnumerable<Job>> GetByCategory(int id);

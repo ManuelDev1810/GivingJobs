@@ -64,5 +64,10 @@ namespace GivingJobs.Services.Repositories
             await dbContext.SaveChangesAsync();
             return job;
         }
+
+        public async Task<List<Job>> JobsOfUsers(string name)
+        {
+            return await dbContext.Jobs.Where(m => m.userName == name).ToListAsync();
+        }
     }
 }

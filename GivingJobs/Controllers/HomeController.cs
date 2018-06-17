@@ -45,6 +45,18 @@ namespace GivingJobs.Controllers
                 return BadRequest();
         }
 
+        [HttpGet]
+        [Route("jobsOfUser/{name}")]
+        public async Task<IActionResult> GetJobsOfUser(string name)
+        {
+            List<Job> Jobs = await jobRepository.JobsOfUsers(name);
+            foreach (var job in Jobs)
+            {
+                job.Category = await categoryRepository.GetById(job.CategoryId);
+            }
+            return Ok(Jobs);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(Job model)
         {

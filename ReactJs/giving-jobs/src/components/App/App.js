@@ -20,6 +20,7 @@ class App extends Component {
        user: sessionStorage.getItem('user') || null,
        jobs: [],
        categories: [],
+       jobsOfUser: [],
        loading: true,
        isAnAdmin: false,
        successfulEditing: false

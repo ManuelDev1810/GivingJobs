@@ -30,15 +30,18 @@ class EditPost extends Component {
         let name = this.name.value
         let description = this.description.value
         let categoryId = this.category.value
-        console.log(categoryId)
+        let userName = this.userName.value
+        let userEmail = this.userEmail.value
         let put = {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({id,name,description,categoryId})
+            body: JSON.stringify({id,name,description,categoryId,userName,userEmail})
         }
+        console.log(put)
+        console.log(this.props.location.state.job)
         fetch('https://localhost:44365/api/home', put)
         .then(response => response.json())
         .then(() => this.props.getJobs())
@@ -58,6 +61,8 @@ class EditPost extends Component {
                 <h2>{`Edit: ${props.job.name}`}</h2>
                 <div>
                     <input type="hidden" value={props.job.id} ref={id => this.id = id} />
+                    <input type="hidden" value={props.job.userEmail} ref={userEmail => this.userEmail = userEmail} />
+                    <input type="hidden" value={props.job.userName} ref={userName => this.userName = userName} />
                     <div className="form-group">
                         <label htmlFor="id">Name</label>
                         <input type="text" className="form-control w-50" id="id" ref={name => this.name = name}  />
