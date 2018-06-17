@@ -6,7 +6,7 @@ class CreateJob extends Component {
 
     constructor(){
       super();
-      this.state = {categories: []}
+      this.state = {categories: [], successfullLogIn: false}
       this.submitData = this.submitData.bind(this)
       this.onHandleCreateJob = this.onHandleCreateJob.bind(this)
     }
@@ -39,11 +39,17 @@ class CreateJob extends Component {
                 },
             body: JSON.stringify({name: nameInput, description: descriptionInput, categoryId: categoryInput, userName, userEmail})
         }
+        this.sendData(post)
+    }
 
-        fetch('https://localhost:44365//api/home', post)
-            .then(response => response.json())
-            .then(data => this.onHandleCreateJob(data))
-            .then(() => console.log(post))
+    async sendData(data){
+        const response = await fetch('https://localhost:44365//api/home', data);
+        if(response.status !== 200){
+            this.setState({successfullLogIn:true})
+        } else {
+            const data = response.json()
+            this.onHandleCreateJob(data)
+        }
     }
 
     onHandleCreateJob(job){
@@ -79,6 +85,7 @@ class CreateJob extends Component {
                     </div>
 
                     <input onClick={this.submitData} className="btn btn-primary" defaultValue="Submit"  />
+                    {this.state.successfullLogIn ? <div className="alert alert-danger mt-3" role="alert">Hay campos vacios</div> : ''}
                 </form>
             </div>
         )
