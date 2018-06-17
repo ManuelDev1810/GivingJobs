@@ -34,6 +34,9 @@ namespace GivingJobs.Migrations
                     Description = table.Column<string>(nullable: false),
                     userName = table.Column<string>(nullable: false),
                     userEmail = table.Column<string>(nullable: false),
+                    Location = table.Column<string>(nullable: false),
+                    Position = table.Column<string>(nullable: false),
+                    Company = table.Column<string>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GivingJobs.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180616164459_InitialStage")]
+    [Migration("20180617180153_InitialStage")]
     partial class InitialStage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,12 +46,21 @@ namespace GivingJobs.Migrations
 
                     b.Property<int>("CategoryId");
 
+                    b.Property<string>("Company")
+                        .IsRequired();
+
                     b.Property<DateTime>("Date");
 
                     b.Property<string>("Description")
                         .IsRequired();
 
+                    b.Property<string>("Location")
+                        .IsRequired();
+
                     b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("Position")
                         .IsRequired();
 
                     b.Property<string>("userEmail")

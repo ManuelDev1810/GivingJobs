@@ -62,7 +62,8 @@ class Jobs extends Component{
                   <tbody>
                     {filteredJobs.map(job => 
                           <tr onClick={() => this.jobComponent(job.id, props)} key={job.id}>
-                            <td>{job.name}</td><td>{Jobs.date(job.date)}</td>
+                            <td>{job.name}</td>
+                            <td>{Jobs.date(job.date)}</td>
                             <td>{job.category.name}</td>
                           </tr>
                     ).reverse()}

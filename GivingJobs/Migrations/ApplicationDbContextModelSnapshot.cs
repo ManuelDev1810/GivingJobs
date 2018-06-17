@@ -44,12 +44,21 @@ namespace GivingJobs.Migrations
 
                     b.Property<int>("CategoryId");
 
+                    b.Property<string>("Company")
+                        .IsRequired();
+
                     b.Property<DateTime>("Date");
 
                     b.Property<string>("Description")
                         .IsRequired();
 
+                    b.Property<string>("Location")
+                        .IsRequired();
+
                     b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("Position")
                         .IsRequired();
 
                     b.Property<string>("userEmail")
