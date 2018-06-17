@@ -116,7 +116,7 @@ class App extends Component {
                 categories={this.state.categories} getJobs={this.getJobs} />} />
             <Route path="/CreateJob" render={props => <CreateJob {... props} addNewJob={this.addNewJob} user={this.state.user} />} />
             <Route path="/Login" render={props => <Login {...props} user={this.state.user} logIn={this.logIn} />} />
-            <Route path="/Register" render={props => <Register {...props} />}/>
+            <Route path="/Register" render={props => <Register {...props} user={this.state.user}/>}/>
             <Route path="/Job" render={props => <Job {...props} />} />
             <Route path="/Category" render={props => <Category {...props} />} />
             <Route path="/Profile" render={props => <Profile {...props} user={this.state.user} 
