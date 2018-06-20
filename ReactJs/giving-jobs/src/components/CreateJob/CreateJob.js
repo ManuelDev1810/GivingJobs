@@ -34,7 +34,9 @@ class CreateJob extends Component {
         let position = this.position.value
         let type = this.type.value
         let file = this.logo.files[0]
-        let pathLogo = file.name
+        let pathLogo = file !== undefined ? file.name : null
+
+     
         
         let post = {
             method: 'POST',
@@ -44,7 +46,6 @@ class CreateJob extends Component {
                 },
             body: JSON.stringify({name: nameInput, description: descriptionInput, categoryId: categoryInput, userName, userEmail,company,location,position,type, pathLogo,file})
         }
-
         let data = new FormData()
         data.append('file', file)
         let img = {
@@ -55,13 +56,18 @@ class CreateJob extends Component {
     }
 
     async sendData(post, img){
-        const responseModel  = await fetch('https://localhost:44365//api/home', post);
-        const responseImg = await fetch('https://localhost:44365//api/home/img', img);
-        if(responseModel.status !== 200 && responseImg.status !== 200){
+        try{
+            const responseModel  = await fetch('https://localhost:44365//api/home', post);
+            const responseImg = await fetch('https://localhost:44365//api/home/img', img);
+            if(responseModel.status !== 200 && responseImg.status !== 200){
+                this.setState({successfullLogIn:true})
+            } else {
+                const data = responseModel.json()
+                this.onHandleCreateJob(data)
+            }
+        }catch(e){
+            console.log('NOLA')
             this.setState({successfullLogIn:true})
-        } else {
-            const data = responseModel.json()
-            this.onHandleCreateJob(data)
         }
     }
 
@@ -100,7 +106,7 @@ class CreateJob extends Component {
                     </div>
 
                     <div>
-                        <label >Logo</label>
+                        <label>Logo</label>
                         <input type="file" name="file" ref={logo => this.logo = logo} />
                     </div>
 

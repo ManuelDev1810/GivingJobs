@@ -35,7 +35,9 @@ class EditPost extends Component {
         let company = this.company.value
         let location = this.location.value
         let position = this.position.value
-
+        let type = this.type.value
+        let file = this.logo.files[0]
+        let pathLogo = file.name
 
         let put = {
             method: 'PUT',
@@ -43,14 +45,37 @@ class EditPost extends Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({id,name,description,categoryId,userName,userEmail,company,location,position})
+            body: JSON.stringify({id,name,description,categoryId,userName,userEmail,company,location,position,type,pathLogo})
         }
-        console.log(put)
-        console.log(this.props.location.state.job)
-        fetch('https://localhost:44365/api/home', put)
-        .then(response => response.json())
-        .then(() => this.props.getJobs())
-        .then(() => this.props.history.push('/EditPosts'))
+
+        let data = new FormData()
+        data.append('file', file)
+        let img = {
+            method: 'POST',
+            body: data
+        }
+
+        this.sendData(put, img)
+        // console.log(put)
+        // console.log(this.props.location.state.job)
+        // fetch('https://localhost:44365/api/home', put)
+        // .then(response => response.json())
+        // .then(() => this.props.getJobs())
+        // .then(() => this.props.history.push('/EditPosts'))
+    }
+
+    async sendData(put, img){
+        const responseModel  = await fetch('https://localhost:44365/api/home', put)
+        const responseImg = await fetch('https://localhost:44365//api/home/img', img);
+        if(responseModel.status === 200 && responseImg.status === 200){
+
+             await responseModel.json();
+            this.props.getJobs();
+            this.props.history.push('/EditPosts')
+
+        } else {
+            console.log('ERROR')
+        }
     }
 
     renderPost(){
@@ -88,6 +113,11 @@ class EditPost extends Component {
                         <input className="form-control w-50" type="text" id="position" ref={(position) => this.position = position}/>
                     </div>
 
+                    <div>
+                        <label >Logo</label>
+                        <input type="file" name="file" ref={logo => this.logo = logo} />
+                    </div>
+
                      <div className="form-group">
                         <label htmlFor="description">Description</label>
                         <textarea type="text" className="form-control w-50" id="description" ref={description => this.description = description}>
@@ -100,6 +130,15 @@ class EditPost extends Component {
                             {this.state.categories.map(category => 
                                 <option key={category.id} value={category.id}>{category.name}</option>
                             )}
+                        </select>
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="categories">Type</label>
+                        <select id="categories" className="form-control" ref={type => this.type = type}>
+                                <option value="Full Time">Full Time</option>
+                                <option value="Parte Time">Part Time</option>
+                                <option value="Freelance">Freelance</option>
                         </select>
                     </div>
                 </div>
