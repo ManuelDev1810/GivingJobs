@@ -6,7 +6,8 @@ class EditPost extends Component {
     constructor(props){
         super(props)
         this.state = {
-            categories: []
+            categories: [],
+            successfullEdit: false
         }
         this.editJob = this.editJob.bind(this)
         this.renderPost = this.renderPost.bind(this)
@@ -37,7 +38,7 @@ class EditPost extends Component {
         let position = this.position.value
         let type = this.type.value
         let file = this.logo.files[0]
-        let pathLogo = file.name
+        let pathLogo = file !== undefined ? file.name : null
 
         let put = {
             method: 'PUT',
@@ -56,26 +57,29 @@ class EditPost extends Component {
         }
 
         this.sendData(put, img)
-        // console.log(put)
-        // console.log(this.props.location.state.job)
-        // fetch('https://localhost:44365/api/home', put)
-        // .then(response => response.json())
-        // .then(() => this.props.getJobs())
-        // .then(() => this.props.history.push('/EditPosts'))
     }
 
     async sendData(put, img){
-        const responseModel  = await fetch('https://localhost:44365/api/home', put)
-        const responseImg = await fetch('https://localhost:44365//api/home/img', img);
-        if(responseModel.status === 200 && responseImg.status === 200){
-
-             await responseModel.json();
-            this.props.getJobs();
-            this.props.history.push('/EditPosts')
-
-        } else {
-            console.log('ERROR')
+        try{
+            const responseModel  = await fetch('https://localhost:44365/api/home', put)
+            const responseImg = await fetch('https://localhost:44365//api/home/img', img);
+            if(responseModel.status === 200 && responseImg.status === 200){
+    
+                 await responseModel.json();
+                this.props.getJobs();
+                if(this.props.isAnAdmin === true){
+                    this.props.history.push('/EditPosts')
+                }else {
+                    this.props.history.push('/Profile')
+                }
+    
+            } else {
+                this.setState({successfullLogIn:true})
+            }
+        }catch(e){
+            this.setState({successfullLogIn:true})
         }
+
     }
 
     renderPost(){
@@ -90,6 +94,7 @@ class EditPost extends Component {
                 <hr />
                 <h2>{`Edit: ${props.job.name}`}</h2>
                 <div>
+                    {this.state.successfullLogIn ? <div className="alert alert-danger mt-3" role="alert">Hay campos vacios</div> : ''}
                     <input type="hidden" value={props.job.id} ref={id => this.id = id} />
                     <input type="hidden" value={props.job.userEmail} ref={userEmail => this.userEmail = userEmail} />
                     <input type="hidden" value={props.job.userName} ref={userName => this.userName = userName} />

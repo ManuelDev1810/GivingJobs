@@ -125,7 +125,7 @@ class App extends Component {
             <Route path="/EditPosts" render={props => <EditPosts {...props} jobs={this.state.jobs}
                 isAnAdmin={this.state.isAnAdmin} onIsAnAdmin={this.onIsAnAdmin} user={this.state.user} getJobs={this.getJobs}
                 onHandleAdmin={this.onHandleAdmin} />} />
-            <Route path="/EditPost" render={props => <EditPost {...props} getJobs={this.getJobs} />} />
+            <Route path="/EditPost" render={props => <EditPost {...props} getJobs={this.getJobs} isAnAdmin={this.state.isAnAdmin} />} />
         </div>
       </Router>
     )
