@@ -11,7 +11,7 @@ class Profile extends Component {
     }
 
     async componentWillMount(){
-        let userName = this.props.user.userName == undefined ? JSON.parse(this.props.user).userName : this.props.user.userName
+        let userName = this.props.user.userName === undefined ? JSON.parse(this.props.user).userName : this.props.user.userName
         const response = await fetch('https://localhost:44365/api/home/jobsOfUser/' + userName)
         const data = await response.json()
         this.setState({jobs:data})
@@ -51,7 +51,7 @@ class Profile extends Component {
 
     infoUser(){     
         var user = {}
-        if(Object.prototype.toString.call(this.props.user) === "[object String]"){
+        if(Object.prototype.toString.call(this.props.user) == "[object String]"){
             user = JSON.parse(this.props.user)
         } else {
             user = this.props.user
@@ -99,7 +99,7 @@ class Profile extends Component {
     }
 
     jobsOfUser(){
-        let user = this.props.user == undefined ? JSON.parse(this.props.user) : this.props.user
+        let user = this.props.user === undefined ? JSON.parse(this.props.user) : this.props.user
         let filterJobs = this.state.jobs.filter(
             job => {
                 return (job.location.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 ||
@@ -121,7 +121,7 @@ class Profile extends Component {
                             <thead className="thead-dark">
                             <tr>
                                 <th scope="col">Location</th>
-                                <th scope="col">Postiion</th>
+                                <th scope="col">Position</th>
                                 <th scope="col">Company</th>
                                 <th scope="col">Edit</th>
                                 <th scope="col">Delete</th>

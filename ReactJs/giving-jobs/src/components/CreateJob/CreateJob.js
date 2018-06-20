@@ -32,7 +32,9 @@ class CreateJob extends Component {
         let company = this.company.value
         let location = this.location.value
         let position = this.position.value
-    
+        let type = this.type.value
+        let file = this.logo.files[0]
+        let pathLogo = file.name
         
         let post = {
             method: 'POST',
@@ -40,17 +42,25 @@ class CreateJob extends Component {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-            body: JSON.stringify({name: nameInput, description: descriptionInput, categoryId: categoryInput, userName, userEmail,company,location,position})
+            body: JSON.stringify({name: nameInput, description: descriptionInput, categoryId: categoryInput, userName, userEmail,company,location,position,type, pathLogo,file})
         }
-        this.sendData(post)
+
+        let data = new FormData()
+        data.append('file', file)
+        let img = {
+            method: 'POST',
+            body: data
+        }
+        this.sendData(post, img)
     }
 
-    async sendData(data){
-        const response = await fetch('https://localhost:44365//api/home', data);
-        if(response.status !== 200){
+    async sendData(post, img){
+        const responseModel  = await fetch('https://localhost:44365//api/home', post);
+        const responseImg = await fetch('https://localhost:44365//api/home/img', img);
+        if(responseModel.status !== 200 && responseImg.status !== 200){
             this.setState({successfullLogIn:true})
         } else {
-            const data = response.json()
+            const data = responseModel.json()
             this.onHandleCreateJob(data)
         }
     }
@@ -67,7 +77,7 @@ class CreateJob extends Component {
                 <Link className="w-25" to="/">Home</Link>
                 <hr />
                 <h2>Create a Job</h2>
-                <form className="">
+                <form className="" encType="multipart/form-data">
                     {this.state.successfullLogIn ? <div className="alert alert-danger mt-3" role="alert">Hay campos vacios</div> : ''}
                     <div className="form-group">
                         <label htmlFor="name">Name</label>
@@ -89,12 +99,26 @@ class CreateJob extends Component {
                         <input className="form-control" type="text" id="position" ref={(position) => this.position = position}/>
                     </div>
 
+                    <div>
+                        <label >Logo</label>
+                        <input type="file" name="file" ref={logo => this.logo = logo} />
+                    </div>
+
                     <div className="form-group">
                         <label htmlFor="categories">Category</label>
                         <select id="categories" className="form-control" ref={category => this.category = category}>
                            {this.state.categories.map(category =>
                                 <option key={category.id} name="categoryId" value={category.id}>{category.name}</option>
                             )}
+                        </select>
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="categories">Type</label>
+                        <select id="categories" className="form-control" ref={type => this.type = type}>
+                                <option value="Full Time">Full Time</option>
+                                <option value="Parte Time">Part Time</option>
+                                <option value="Freelance">Freelance</option>
                         </select>
                     </div>
 

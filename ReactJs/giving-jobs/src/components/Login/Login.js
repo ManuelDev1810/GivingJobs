@@ -23,7 +23,7 @@ class Login extends Component{
         let emailInput = this.email.value
         let passwordInput = this.password.value
 
-        if(emailInput == '' || passwordInput == ''){
+        if(emailInput === '' || passwordInput === ''){
             this.setState({successfullLogIn:true})
         } else {
     

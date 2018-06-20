@@ -12,19 +12,27 @@ class Job extends Component {
 
     //Start to work here
     componentWillMount(){
-        if(this.props.location.state != undefined){
+        if(this.props.location.state !== undefined){
             fetch('https://localhost:44365/api/home/job/' + this.props.location.state.id)
             .then(response => response.json())
             .then(data => this.setState({job:data}))
         }
     }
 
+    static changedPath(img){
+        console.log(img.replace(img, "/"))
+    }
+
 
     static renderJob(state){
+        if(state !== null)
         return(
         <div>
             <Link className="w-25" to="/">Home</Link>
             <hr />
+            {this.changedPath(state.job.pathLogo)}
+            <img src={require('E:/LocalGit/GivingJobs/ReactJs/giving-jobs/src/imgs/' + state.job.pathLogo)} />
+            <p>{state.job.pathLogo}</p>
             <p>{state.job.id}</p>
             <p>{state.job.name}</p>
             <p>{state.job.date}</p>
@@ -52,6 +60,7 @@ class Job extends Component {
         return(
             <div>
                 {content}
+                {console.log(this.state.job)}
             </div>
         )
     }

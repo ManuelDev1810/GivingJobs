@@ -45,7 +45,7 @@ class EditPosts extends  Component{
                         <thead className="thead-dark">
                         <tr>
                             <th scope="col">Location</th>
-                            <th scope="col">Postiion</th>
+                            <th scope="col">Position</th>
                             <th scope="col">Company</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>

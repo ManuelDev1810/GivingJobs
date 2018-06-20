@@ -12,7 +12,7 @@ class Category extends Component{
     }
 
     componentWillMount(){
-        if(this.props.location.state != undefined){
+        if(this.props.location.state !== undefined){
             fetch('https://localhost:44365/api/category/' + this.props.location.state.id)
             .then(response => response.json())
             .then(data => {

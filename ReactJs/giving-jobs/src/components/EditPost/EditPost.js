@@ -14,7 +14,7 @@ class EditPost extends Component {
 
     componentWillMount(){
         this.props.getJobs()
-        if(this.props.location.state == undefined){
+        if(this.props.location.state === undefined){
             this.props.history.push('/')
         } else {
             fetch('https://localhost:44365/api/category')

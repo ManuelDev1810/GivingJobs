@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using GivingJobs.Models;
 using GivingJobs.Services.Interfaces;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GivingJobs.Controllers
@@ -66,6 +69,25 @@ namespace GivingJobs.Controllers
                 return Ok(job);
             else
                 return BadRequest();
+        }
+
+        [EnableCors("AllowAllOrigin")]
+        [Route("img")]
+        [HttpPost]
+        public async Task<IActionResult> CreateImg(IFormFile file)
+        {
+            if (file.Length != 0)
+            {
+
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "E:/LocalGit/GivingJobs/ReactJs/giving-jobs/src/imgs/", file.FileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+                return Ok(file);
+            }
+            return BadRequest();
         }
 
         [HttpPut]
