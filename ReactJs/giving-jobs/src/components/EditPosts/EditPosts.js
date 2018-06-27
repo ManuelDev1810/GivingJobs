@@ -12,6 +12,7 @@ class EditPosts extends  Component{
         this.deleteJob = this.deleteJob.bind(this)
     }
 
+    //This function converts the date in a format that is frindly to see
     date(date){
         var dateCreated = new Date(date);
         return(dateCreated.toDateString())
@@ -41,9 +42,9 @@ class EditPosts extends  Component{
             <div>
                     <h1>Edit Posts</h1>
                     <input type="text" className="form-control mb-3" placeholder="Search" onChange={this.updateSearch} />  
-                    <table className="table col-8">
-                        <thead className="thead-dark">
-                        <tr>
+                    <table className="table table-hover col-8 tablita">
+                        <thead className="thead">
+                        <tr className="circulo">
                             <th scope="col">Location</th>
                             <th scope="col">Position</th>
                             <th scope="col">Company</th>
@@ -52,7 +53,7 @@ class EditPosts extends  Component{
                         </tr>
                         </thead>
     
-                        <tbody>
+                        <tbody className="tbody">
                         {filteredJobs.map(job => 
                                 <tr key={job.id}>
                                     <td>{job.location}</td>

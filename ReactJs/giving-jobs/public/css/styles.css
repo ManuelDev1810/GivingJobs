@@ -1,4 +1,186 @@
+
+body{
+
+background-image: url(../imgs/fondo1.png) ;
+background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+
+
+
+}
+
 .mito{
     font-family: 'Times New Roman', Times, serif;
     font-size: 70px;
+    color:  #0174DF;
 }
+
+
+nav.navbar {
+    background-color:#0174DF;
+    border-radius: 5px;
+}
+
+ .oro  {
+    color: white;
+    font-style: oblique;
+
+}
+.oro:hover{
+
+
+    color: black;
+}
+
+
+
+.carta{
+
+
+    background-color: rgba(112, 225, 253, 0.267);
+
+    border: solid 0.9px #0174DF
+}
+.carta2{
+
+
+    background-color:  rgba(243, 247, 247, 0);
+}
+
+
+
+.carta-titulo{
+
+
+
+    color:#0174DF;
+    font-family: 'Times New Roman', Times, serif;
+    
+}
+
+.thead{
+
+background-color:#0174DF;
+border: none;
+
+color: white;
+
+}
+
+
+/* .tbody{
+
+    background-color: rgba(112, 225, 253, 0.267);
+    border: none;
+    
+} */
+
+.oro :hover{
+
+font-style: normal;
+color: black;
+
+}
+
+.botones{
+
+background-color:#0174DF;
+border-color:#0174DF;
+
+
+
+}
+
+.botones:hover {
+
+background-color: aquamarine;
+
+}
+
+
+.buscador{
+
+size: 50%;
+
+
+
+}
+
+table { 
+    border-collapse: separate; 
+    border-spacing: 0 10px; 
+    margin-top: -10px; /* correct offset on first border spacing if desired */
+}
+
+
+
+th {
+    border: 30px #0174DF ;
+    border-style: none;
+    padding: 5px;
+    background-color:#0174DF;
+}
+th:first-child {
+    border-left-style: solid ;
+    border-top-left-radius: 5px; 
+    border-bottom-left-radius: 5px;
+}
+th:last-child {
+    border-right-style: solid;
+    border-bottom-right-radius: 5px; 
+    border-top-right-radius: 5px; 
+}
+
+
+td {
+    border: 4px #0174DF  ;
+    border-style: none;
+    padding: 10px;
+    background-color: rgba(145, 233, 248, 0.623);
+}
+td:first-child {
+    border-left-style: solid ;
+    border-top-left-radius: 10px; 
+    border-bottom-left-radius: 10px;
+}
+td:last-child {
+    border-right-style: solid  ;
+    border-bottom-right-radius: 10px; 
+    border-top-right-radius: 10px; 
+}
+
+
+
+
+/* ESTA PARTE ES DEL LOGGIN */
+
+.formulario{ 
+
+    background-color:rgba(115, 236, 245, 0.664);
+    height:570px;
+    width:30%;
+    transition: 2s;
+    margin-top:50px;
+    margin-bottom:20px;
+    box-shadow:0px 0px 40px rgb(3, 7, 199), 0px 0px 80px white;
+    border-radius: 25px;
+    position: center;
+      }
+    
+    .logo{
+    
+        height: 205px;
+        width: 250px;
+        margin-top:20px;
+    }
+    
+    .espaciado{
+    
+        margin-top: 20px;
+    }
+    
+    label{
+    text-align: center;
+    
+    }

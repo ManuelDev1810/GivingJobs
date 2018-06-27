@@ -33,7 +33,7 @@ namespace GivingJobs
             /*************Cors**************/
             services.AddCors(options => {
                 options.AddPolicy("AllowAllOrigin", builder =>
-                builder.WithOrigins("http://localhost:3000")
+                builder.AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials()

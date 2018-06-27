@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 class HeaderBar extends Component{
     constructor(props){
@@ -16,15 +16,15 @@ class HeaderBar extends Component{
         if(this.props.user){
             return (
                 <div className="justify-content-end col-2">
-                    <p>Hello {JSON.parse(sessionStorage.user).userName} <Link to="/Profile" className="fas fa-cog"></Link>  <Link to="/" onClick={() => this.logout()}>Logout</Link></p>
-                    <Link  to='/CreateJob'>Create Job</Link>
+                    <p>Hello {JSON.parse(sessionStorage.user).userName} <Link to="/Profile" className="fas fa-cog mr-sm-2 oro"></Link>  <Link className="btn  mr-sm-2 oro" to="/" onClick={() => this.logout()}>Logout</Link></p>
+                    <Link  to='/CreateJob'  className=" btn mr-sm-2 oro">Create Job</Link>
                 </div>
             )
         } else {
             return(
-                <div className="justify-content-end col-2">
-                    <Link to="/Login" className="mr-3">Log In</Link>
-                    <Link to="/Register" className="mr-3">Register</Link>
+                <div className="justify-content-end col-2 power">
+                    <Link to="/Login" className=" btn  mr-sm-2 oro">Log In</Link>
+                    <Link to="/Register" className=" btn  my-2 my-sm-0 oro">Register</Link>
                 </div>
             )
         }
@@ -32,10 +32,14 @@ class HeaderBar extends Component{
 
     render(){
         return(
-            <div className="row mt-3">
-                <h1 className="col-10">Giving Jobs</h1>    
-                {this.authenticated()}
-            </div>
+            <nav className="navbar navbar-dark  poncho" >
+                <a class="navbar-brand" href="#">
+                    <Link to="/"><img src="./imgs/LOGO1.png" width="200" height="80" class="d-inline-block align-top" alt="aun no hay na"/></Link>
+                </a>
+            {this.authenticated()}
+         
+            
+        </nav> 
         )
     }
 }

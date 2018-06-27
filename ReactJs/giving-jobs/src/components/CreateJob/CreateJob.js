@@ -66,7 +66,6 @@ class CreateJob extends Component {
                 this.onHandleCreateJob(data)
             }
         }catch(e){
-            console.log('NOLA')
             this.setState({successfullLogIn:true})
         }
     }
