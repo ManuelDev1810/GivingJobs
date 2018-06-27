@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 
+
 class Job extends Component {
 
     constructor(props){
@@ -11,35 +12,58 @@ class Job extends Component {
     }
 
     //Start to work here
-    componentWillMount(){
+    componentDidMount(){
         if(this.props.location.state !== undefined){
             fetch('https://localhost:44365/api/home/job/' + this.props.location.state.id)
             .then(response => response.json())
             .then(data => this.setState({job:data}))
         }
+        console.log('JOB' + this.state.job)
     }
 
     static changedPath(img){
         console.log(img.replace(img, "/"))
     }
 
+    static date(date){
+        var dateCreated = new Date(date);
+        return(dateCreated.toDateString())
+    }
+
 
     static renderJob(state){
+
+        const sizePost = {
+            width: 500,
+            height: 500
+        }
+
+        const styleImg = {
+            width: '100%',
+            height: '100%'
+        }
+
         if(state !== null)
         return(
         <div>
             <Link className="w-25" to="/">Home</Link>
             <hr />
             {this.changedPath(state.job.pathLogo)}
-            <img src={require('E:/LocalGit/GivingJobs/ReactJs/giving-jobs/src/imgs/' + state.job.pathLogo)} />
-            <p>{state.job.pathLogo}</p>
-            <p>{state.job.id}</p>
-            <p>{state.job.name}</p>
-            <p>{state.job.date}</p>
-            <p>{state.job.description}</p>
-            <p>{state.job.email}</p>
-            <p>{state.job.category.name}</p>
-            <p>Enviar CV e informacion a <b>{state.job.userEmail}</b></p>
+            <div style={sizePost} className="card">
+                <img style={styleImg} className="card-img-top" src={require('E:/LocalGit/GivingJobs/ReactJs/giving-jobs/src/imgs/' + state.job.pathLogo)} />
+                <div className="card-body">
+                    <h5 className="card-title">{`Job: ${state.job.name}`}</h5>
+                    <p class="card-text">{state.job.description}</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{`Company: ${state.job.company}`}</li>
+                        <li class="list-group-item">{`Location: ${state.job.location}`}</li>
+                        <li class="list-group-item">{`Category: ${state.job.category.name}`}</li>
+                        <li class="list-group-item">{`Type: ${state.job.type}`}</li>
+                        <li class="list-group-item">{`Date: ${this.date(state.job.date)}`}</li>
+                        <li className="list-group-item">Send CV to <b>{state.job.userEmail}</b></li>
+                    </ul>
+                </div>
+            </div>
         </div>
         )
     }

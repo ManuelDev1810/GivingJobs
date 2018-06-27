@@ -33,12 +33,10 @@ class HeaderBar extends Component{
     render(){
         return(
             <nav className="navbar navbar-dark  poncho" >
-                <a class="navbar-brand" href="#">
-                    <Link to="/"><img src="./imgs/LOGO1.png" width="200" height="80" class="d-inline-block align-top" alt="aun no hay na"/></Link>
-                </a>
-            {this.authenticated()}
-         
-            
+                <span className="navbar-brand" href="#">
+                    <Link to="/"><img src="./imgs/LOGO1.png" width="200" height="80" className ="d-inline-block align-top" alt="aun no hay na"/></Link>
+                </span>
+                 {this.authenticated()}   
         </nav> 
         )
     }
