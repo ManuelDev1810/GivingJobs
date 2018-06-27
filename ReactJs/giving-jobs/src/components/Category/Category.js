@@ -22,7 +22,23 @@ class Category extends Component{
         }
     }
 
+    date(date){
+        var dateCreated = new Date(date);
+        return(dateCreated.toDateString())
+    }
+
     renderJosbOfCategory(state){
+        const sizePost = {
+            width: 400,
+            height: 400,
+            marginBottom: '500px'
+        }
+
+        const styleImg = {
+            width: '100%',
+            height: '100%'
+        }
+
         return(
         <div>
             <h2>Category {state.category.name}</h2>
@@ -30,14 +46,22 @@ class Category extends Component{
             <p>{state.category.description}</p>
             <h4>Jobs</h4>
             {state.jobs.map(job => 
-                <div key={job.id}>
-                    <h5>{job.id}</h5>
-                    <p>{job.name}</p>
-                    <p>{job.date}</p>
-                    <p>{job.description}</p>
-                    <p>{job.email}</p>
+                <div key={job.id} className="card" style={sizePost}>
+                    <img style={styleImg} className="card-img-top" src={require('E:/LocalGit/GivingJobs/ReactJs/giving-jobs/src/imgs/' + job.pathLogo)} />
+                    <div className="card-body">
+                    <h5 className="card-title">{`Job: ${job.name}`}</h5>
+                    <p class="card-text">{job.description}</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{`Company: ${job.company}`}</li>
+                        <li class="list-group-item">{`Location: ${job.location}`}</li>
+                        <li class="list-group-item">{`Category: ${job.category.name}`}</li>
+                        <li class="list-group-item">{`Type: ${job.type}`}</li>
+                        <li class="list-group-item">{`Date: ${this.date(job.date)}`}</li>
+                        <li className="list-group-item">Send CV to <b>{job.userEmail}</b></li>
+                    </ul>
                 </div>
-            )}
+                </div>
+            ).reverse()}
         </div>
         )
     }

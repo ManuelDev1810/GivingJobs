@@ -21,9 +21,9 @@ class Job extends Component {
         console.log('JOB' + this.state.job)
     }
 
-    static changedPath(img){
-        console.log(img.replace(img, "/"))
-    }
+    // static changedPath(img){
+    //     console.log(img.replace(img, "/"))
+    // }
 
     static date(date){
         var dateCreated = new Date(date);
@@ -34,8 +34,8 @@ class Job extends Component {
     static renderJob(state){
 
         const sizePost = {
-            width: 500,
-            height: 500
+            width: 400,
+            height: 400
         }
 
         const styleImg = {
@@ -48,7 +48,7 @@ class Job extends Component {
         <div>
             <Link className="w-25" to="/">Home</Link>
             <hr />
-            {this.changedPath(state.job.pathLogo)}
+            {/* {this.changedPath(state.job.pathLogo)} */}
             <div style={sizePost} className="card">
                 <img style={styleImg} className="card-img-top" src={require('E:/LocalGit/GivingJobs/ReactJs/giving-jobs/src/imgs/' + state.job.pathLogo)} />
                 <div className="card-body">
