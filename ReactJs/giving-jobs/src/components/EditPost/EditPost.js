@@ -90,7 +90,9 @@ class EditPost extends Component {
         } else {
             return(
                 <div>
-                <Link className="w-25" to="/">Home</Link>
+                <div className="mt-3">
+                    <Link className="w-25"  to="/"> <i class="fas fa-home"></i> Home</Link>
+                </div>
                 <hr />
                 <h2>{`Edit: ${props.job.name}`}</h2>
                 <div>

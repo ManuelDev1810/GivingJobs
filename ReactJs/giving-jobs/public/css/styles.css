@@ -33,7 +33,11 @@ nav.navbar {
     color: black;
 }
 
-
+.carta-category{
+    background-color: rgba(112, 225, 253, 0.267);
+    border: solid 0.9px #0174DF;
+    height: 250px;
+}
 
 .carta{
 
@@ -184,3 +188,72 @@ td:last-child {
     text-align: center;
     
     }
+
+
+/* ESTO ES DEL JOBS */
+
+.texto hr{
+
+width: 90%;
+
+}
+
+
+.tico{
+
+padding: 0%;
+border-bottom-left-radius: 25px;
+
+
+border-bottom-right-radius: 25px;
+
+}
+
+    .texto{
+
+
+
+text-align: center;
+
+background-color:rgba(170, 233, 240, 0.705);
+    height:950px;
+    width:60%;
+    transition: 2s;
+    margin-top:50px;
+    margin-bottom:20px;
+    box-shadow:0px 0px 40px rgb(3, 7, 199), 0px 0px 80px white;
+    border-radius: 25px;
+    
+
+
+    }
+.color1{
+
+background-color: rgba(3, 196, 202, 0.472);
+
+
+}
+.color1:hover{
+
+    background-color: rgba(107, 124, 124, 0.404);
+
+}
+
+.texto2{
+
+
+
+    text-align: center;
+    
+    background-color:rgba(170, 233, 240, 0.705);
+        height:950px;
+        width:60%;
+        transition: 2s;
+        margin-top:50px;
+        margin-bottom:20px;
+        box-shadow:0px 0px 40px rgb(3, 7, 199), 0px 0px 80px white;
+        border-radius: 25px;
+        
+    
+    
+        }

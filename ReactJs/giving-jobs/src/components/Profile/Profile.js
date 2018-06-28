@@ -150,7 +150,9 @@ class Profile extends Component {
     render(){
         return(
             <div>
-                <Link className="w-25" to="/">Home</Link>
+                <div className="mt-3">
+                <Link className="w-25"  to="/"> <i class="fas fa-home"></i> Home</Link>
+            </div>
                 <hr />
                 {this.infoUser()}
                 {this.jobsOfUser()}

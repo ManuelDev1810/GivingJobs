@@ -46,24 +46,32 @@ class Job extends Component {
         if(state !== null)
         return(
         <div>
-            <Link className="w-25" to="/">Home</Link>
+            <div className="mt-3">
+                <Link className="w-25"  to="/"> <i class="fas fa-home"></i> Home</Link>
+            </div>
             <hr />
             {/* {this.changedPath(state.job.pathLogo)} */}
-            <div style={sizePost} className="card">
-                <img style={styleImg} className="card-img-top" src={require('E:/LocalGit/GivingJobs/ReactJs/giving-jobs/src/imgs/' + state.job.pathLogo)} />
-                <div className="card-body">
-                    <h5 className="card-title">{`Job: ${state.job.name}`}</h5>
-                    <p class="card-text">{state.job.description}</p>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">{`Company: ${state.job.company}`}</li>
-                        <li class="list-group-item">{`Location: ${state.job.location}`}</li>
-                        <li class="list-group-item">{`Category: ${state.job.category.name}`}</li>
-                        <li class="list-group-item">{`Type: ${state.job.type}`}</li>
-                        <li class="list-group-item">{`Date: ${this.date(state.job.date)}`}</li>
-                        <li className="list-group-item">Send CV to <b>{state.job.userEmail}</b></li>
-                    </ul>
-                </div>
-            </div>
+
+           <center> <div className="texto">
+
+                               <center> <div style={sizePost} className="card">
+                                    <div className="tico"><img style={styleImg} className="card-img-top tico" src={require('E:/LocalGit/GivingJobs/ReactJs/giving-jobs/src/imgs/' + state.job.pathLogo)} /></div>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{`Job: ${state.job.name}`}</h5>
+                                        <p class="card-text">{state.job.description}</p>
+                                        <ul class="list-group list-group-flush color1 ">
+                                            <li class="list-group-item color1">{`Company: ${state.job.company}`}</li>
+                                            <li class="list-group-item color1">{`Location: ${state.job.location}`}</li>
+                                            <li class="list-group-item color1">{`Category: ${state.job.category.name}`}</li>
+                                            <li class="list-group-item color1">{`Type: ${state.job.type}`}</li>
+                                            <li class="list-group-item color1">{`Date: ${this.date(state.job.date)}`}</li>
+                                            <li className="list-group-item color1">Send CV to <b>{state.job.userEmail}</b></li>
+                                        </ul>
+                                    </div>
+                                </div></center>
+
+            </div> </center>
+
         </div>
         )
     }
@@ -71,7 +79,7 @@ class Job extends Component {
     static renderNotFound(){
         return(
             <div>
-                <Link className="w-25" to="/">Home</Link>
+                <Link className="w-25" to="/"><i class="fas fa-home"></i></Link>
                 <hr />
                 <p>Loading</p>
             </div>

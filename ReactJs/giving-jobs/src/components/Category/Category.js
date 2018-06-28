@@ -46,21 +46,27 @@ class Category extends Component{
             <p>{state.category.description}</p>
             <h4>Jobs</h4>
             {state.jobs.map(job => 
+                
+                <center> <div className="texto2">
+                <center>
                 <div key={job.id} className="card" style={sizePost}>
-                    <img style={styleImg} className="card-img-top" src={require('E:/LocalGit/GivingJobs/ReactJs/giving-jobs/src/imgs/' + job.pathLogo)} />
+                   <div className="tico"> <img style={styleImg} className="card-img-top tico" src={require('E:/LocalGit/GivingJobs/ReactJs/giving-jobs/src/imgs/' + job.pathLogo)} /></div>
                     <div className="card-body">
                     <h5 className="card-title">{`Job: ${job.name}`}</h5>
                     <p class="card-text">{job.description}</p>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">{`Company: ${job.company}`}</li>
-                        <li class="list-group-item">{`Location: ${job.location}`}</li>
-                        <li class="list-group-item">{`Category: ${job.category.name}`}</li>
-                        <li class="list-group-item">{`Type: ${job.type}`}</li>
-                        <li class="list-group-item">{`Date: ${this.date(job.date)}`}</li>
-                        <li className="list-group-item">Send CV to <b>{job.userEmail}</b></li>
+                        <li class="list-group-item color1">{`Company: ${job.company}`}</li>
+                        <li class="list-group-item color1">{`Location: ${job.location}`}</li>
+                        <li class="list-group-item color1">{`Category: ${job.category.name}`}</li>
+                        <li class="list-group-item color1">{`Type: ${job.type}`}</li>
+                        <li class="list-group-item color1">{`Date: ${this.date(job.date)}`}</li>
+                        <li className="list-group-item color1">Send CV to <b>{job.userEmail}</b></li>
                     </ul>
                 </div>
-                </div>
+                </div></center> </div></center>
+
+
+
             ).reverse()}
         </div>
         )
@@ -78,7 +84,9 @@ class Category extends Component{
         let content = this.state.category ? this.renderJosbOfCategory(this.state) : this.renderNotFound(this.state)
         return(
             <div>
-                <Link className="w-25" to="/">Home</Link>
+                <div className="mt-3">
+                    <Link className="w-25"  to="/"> <i class="fas fa-home"></i> Home</Link>
+                </div>
                 <hr />
                 {content}
             </div>    

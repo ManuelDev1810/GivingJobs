@@ -51,8 +51,10 @@ class Login extends Component{
     render(){
         return(
             <div>
-                <Link className="w-25"  to="/">Home</Link>
-                <Link to="/Register" className="w-35 ml-3">Register</Link>
+                <div className="mt-3">
+                    <Link className="w-25"  to="/"> <i class="fas fa-home"></i> Home</Link>
+                    <Link to="/Register" className="w-35 ml-3"><i class="fas fa-id-card"></i> Register</Link>
+                </div>
                 <hr />
                 <div className="container formulario">               
                     <div >
@@ -69,12 +71,12 @@ class Login extends Component{
 
                                     <div class="form-group">
                                                         
-                                        <label  className="col-xs-12" htmlFor="email">Email</label>
+                                        <label  className="col-xs-12" htmlFor="email"><i class="fas fa-envelope"></i>  Email</label>
                                         <div className="col-xs-10 col-offset-1">
                                             <input className="form-control" type="text" id="email" ref={(email) => this.email = email} />
                                         </div>
                 
-                                        <label className="col-xs-12" htmlFor="password">Password</label>
+                                        <label className="col-xs-12" htmlFor="password"><i class="fas fa-unlock"></i> Password</label>
                                         <div className="col-xs-10 col-offset-1">
                                             <input className="form-control" type="password" id="password" ref={(password) => this.password = password} />
                                         </div>     

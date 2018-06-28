@@ -108,7 +108,7 @@ class Jobs extends Component{
             
             {/* Cateogires */}
 
-            <div className="card col-3 carta">
+            <div className="card col-3 carta-category">
                   <div className="card-body d-flex flex-column carta2">
                       <h3 className="card-title carta-titulo">Categories</h3>
                       {props.categories.map(category => 
@@ -128,7 +128,7 @@ class Jobs extends Component{
         console.log(this.props.loading)
         return(
           <div>
-            <input className="mb-2 form-control" type="text" name="nombre" placeholder="Search"  onChange={this.updateSearch} />
+            <input className="mb-2 form-control mt-3" type="text" name="nombre" placeholder="Search"  onChange={this.updateSearch} />
             {content}
           </div>
         )
